@@ -15,6 +15,7 @@
 
         <TextView
             android:id="@+id/text_home"
+            android:text="Ortsmeldung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -72,8 +73,23 @@
                 android:id="@+id/textView3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TODO STATION"
+                android:text="Station:"
                 android:textSize="@dimen/font_size" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AutoCompleteTextView" />
+
+            <ImageButton
+                android:id="@+id/imageButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_menu_mylocation"
+                android:minWidth="12sp"
+                android:contentDescription="Locate" />
+
         </LinearLayout>
 
         <LinearLayout
