@@ -37,8 +37,6 @@ class StationReader(private val context: Context) {
             }
         }
 
-        Log.i("StationReader", "Name: ${name},x: ${x},y: ${y}")
-
         val stationmap = mutableMapOf<Pair<Double, Double>, String>()
 
 

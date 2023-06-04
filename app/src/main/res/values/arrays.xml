@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <array name="groups">
+            <item>MR X</item>
+            <item>Rot</item>
+            <item>Blau</item>
+            <item>Gelb</item>
+            <item>Grün</item>
+            <item>Orange</item>
+        </array>
+    <array name="vehicle">
+        <item>Regio</item>
+        <item>S-Bahn</item>
+        <item>U-Bahn</item>
+        <item>Tram</item>
+        <item>Metro-Bus</item>
+        <item>Bus</item>
+    </array>
+</resources>
