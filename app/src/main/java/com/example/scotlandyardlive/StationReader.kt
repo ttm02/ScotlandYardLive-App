@@ -1,8 +1,14 @@
 package com.example.scotlandyardlive
 
+
 import android.content.Context
+import android.content.res.AssetManager
 import android.util.Log
-import java.io.BufferedReader
+import com.opencsv.CSVParserBuilder
+
+import com.opencsv.CSVReader
+import com.opencsv.CSVReaderBuilder
+import java.io.FileReader
 import java.io.IOException
 import java.io.InputStreamReader
 import java.lang.NumberFormatException
@@ -10,7 +16,7 @@ import java.lang.NumberFormatException
 class StationReader(private val context: Context) {
 
     public
-    fun readStationsFromAssets(): Map<Pair<Double,Double>,String> {
+    fun readStationsFromAssets(): Map<Pair<Double, Double>, String> {
         val data = readStationsCSV()
 
         // read header
@@ -19,6 +25,7 @@ class StationReader(private val context: Context) {
         var x = 0
         var y = 0
         for (i in header.indices) {
+            Log.i("StationReader", "${header[i]}")
             if (header[i] == "HST_NAME") {
                 name = i
             }
@@ -30,20 +37,22 @@ class StationReader(private val context: Context) {
             }
         }
 
-        val stationmap = mutableMapOf<Pair<Double,Double>,String>()
+        Log.i("StationReader", "Name: ${name},x: ${x},y: ${y}")
+
+        val stationmap = mutableMapOf<Pair<Double, Double>, String>()
 
 
         data.forEachIndexed { index, entry ->
             if (index > 0) {
                 // Skip the first entry and perform your desired operations on the remaining entries
                 try {
-                    val x_coord= entry[x].replace(",",".").toDouble()
-                    val y_coord= entry[y].replace(",",".").toDouble()
+                    val x_coord = entry[x].replace(",", ".").toDouble()
+                    val y_coord = entry[y].replace(",", ".").toDouble()
 
-                    stationmap[Pair(x_coord,y_coord)] = entry[name]
+                    stationmap[Pair(x_coord, y_coord)] = entry[name]
 
-                }catch (e:NumberFormatException){
-                    Log.e("StationReader","Error Reading Koordinate value: ${e.message}")
+                } catch (e: NumberFormatException) {
+                    Log.e("StationReader", "Error Reading Coordinate value: ${e.message}")
                 }
             }
         }
@@ -53,25 +62,34 @@ class StationReader(private val context: Context) {
 
     private
     fun readStationsCSV(): List<Array<String>> {
-        val data = mutableListOf<Array<String>>()
+
 
         try {
-            val inputStream = context.assets.open("RMV_Haltestellen.csv")
-            val bufferedReader = BufferedReader(InputStreamReader(inputStream))
+            val assetManager: AssetManager = context.assets
+            val inputStream = assetManager.open("RMV_Haltestellen.csv")
+            val reader = CSVReaderBuilder(InputStreamReader(inputStream))
+                .withCSVParser(
+                     CSVParserBuilder()
+                        .withSeparator(';')
+                        .build()
+                ).build()
 
-            var line: String?
-            while (bufferedReader.readLine().also { line = it } != null) {
-                val row =
-                    line!!.split(",") // Change the delimiter if your CSV file uses a different separator
-                        .toTypedArray()
-                data.add(row)
+            val data: MutableList<Array<String>> = mutableListOf()
+
+            var line: Array<String>?
+            while (reader.readNext().also { line = it } != null) {
+                line?.let {
+                    val nonNullLine = it.map { field -> field ?: "" }.toTypedArray()
+                    data.add(nonNullLine)
+                }
             }
+            reader.close()
+            inputStream.close()
+            return data.toList()
 
-            bufferedReader.close()
         } catch (e: IOException) {
             Log.e("StationReader", "Error reading CSV file: ${e.message}")
         }
-
-        return data
+        return emptyList()
     }
 }
