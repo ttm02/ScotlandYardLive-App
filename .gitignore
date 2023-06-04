@@ -13,3 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+# you can find the Station file at opendata.rmv.de
+/app/src/main/assets/RMV_Haltestellen.csv
