@@ -14,6 +14,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.Spinner
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
@@ -56,6 +57,18 @@ class HomeFragment : Fragment() {
     private lateinit var stationtextview: AutoCompleteTextView
     private lateinit var buttonLocate: ImageButton
 
+    private lateinit var stationsuggest1:TextView
+    private lateinit var stationsuggest2:TextView
+    private lateinit var stationsuggest3:TextView
+    private lateinit var stationsuggest4:TextView
+    private lateinit var stationsuggest5:TextView
+
+    private lateinit var stationsuggest_val1:String
+    private lateinit var stationsuggest_val2:String
+    private lateinit var stationsuggest_val3:String
+    private lateinit var stationsuggest_val4:String
+    private lateinit var stationsuggest_val5:String
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,6 +92,14 @@ class HomeFragment : Fragment() {
 
         // Apply the adapter to the spinner
         spinner_group_selection.adapter = adapter
+
+
+        stationsuggest1 = binding.stationSuggest1
+        stationsuggest2 = binding.stationSuggest2
+        stationsuggest3 = binding.stationSuggest3
+        stationsuggest4 = binding.stationSuggest4
+        stationsuggest5 = binding.stationSuggest5
+
 
 
         // the radio buttons
@@ -160,8 +181,6 @@ class HomeFragment : Fragment() {
             requestLocation()
         }
 
-        Toast.makeText(thiscontext," Test Text",Toast.LENGTH_SHORT).show()
-
 
 
 
@@ -173,10 +192,7 @@ class HomeFragment : Fragment() {
             android.R.layout.simple_dropdown_item_1line, stations.get_station_list()
         )
 
-        val nearest_station = stations.get_nearest_station(Pair(pos_x,pos_y))
-
         stationtextview.setAdapter(adapter_stations)
-        stationtextview.setText(nearest_station)
 
         buttonLocate = binding.imageButton
 
@@ -185,7 +201,32 @@ class HomeFragment : Fragment() {
             requestLocation()
         }
 
+        stationsuggest1.setOnClickListener { stationtextview.setText(stationsuggest_val1) }
+        stationsuggest2.setOnClickListener { stationtextview.setText(stationsuggest_val2) }
+        stationsuggest3.setOnClickListener { stationtextview.setText(stationsuggest_val3) }
+        stationsuggest4.setOnClickListener { stationtextview.setText(stationsuggest_val4) }
+        stationsuggest5.setOnClickListener { stationtextview.setText(stationsuggest_val5) }
+
         return root
+    }
+
+    private fun update_station_suggestion() {
+        var stations = StationMap.getInstance(thiscontext)
+        val nearest_stations = stations.get_nearest_stations(Pair(pos_x, pos_y),5)
+
+
+        stationsuggest1.setText("${nearest_stations[0].first} (${nearest_stations[0].second}m)")
+        stationsuggest_val1=nearest_stations[0].first
+        stationsuggest2.setText("${nearest_stations[1].first} (${nearest_stations[1].second}m)")
+        stationsuggest_val2=nearest_stations[1].first
+        stationsuggest3.setText("${nearest_stations[2].first} (${nearest_stations[2].second}m)")
+        stationsuggest_val3=nearest_stations[2].first
+        stationsuggest4.setText("${nearest_stations[3].first} (${nearest_stations[3].second}m)")
+        stationsuggest_val4=nearest_stations[3].first
+        stationsuggest5.setText("${nearest_stations[4].first} (${nearest_stations[4].second}m)")
+        stationsuggest_val5=nearest_stations[4].first
+        //stationtextview.setText(nearest_station)
+
     }
 
     private fun requestLocation() {
@@ -206,10 +247,7 @@ class HomeFragment : Fragment() {
                             // Handle location here
                             pos_y = it.latitude
                             pos_x = it.longitude
-                            var stations = StationMap.getInstance(thiscontext)
-                            val nearest_station = stations.get_nearest_station(Pair(pos_x, pos_y))
-                            stationtextview.setText(nearest_station)
-
+                            update_station_suggestion()
                         }else
                             Toast.makeText(thiscontext, "cannot get Location", Toast.LENGTH_SHORT).show()
                     }
@@ -251,6 +289,7 @@ class HomeFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 
 
 }

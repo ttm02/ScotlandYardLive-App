@@ -80,7 +80,8 @@
                 android:id="@+id/autoCompleteTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AutoCompleteTextView" />
+                android:text="AutoCompleteTextView"
+                android:textSize="@dimen/font_size"/>
 
             <ImageButton
                 android:id="@+id/imageButton"
@@ -92,15 +93,53 @@
 
         </LinearLayout>
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/stationSuggest1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size"
+            android:clickable="true"
+            />
 
-        </LinearLayout>
+        <TextView
+            android:id="@+id/stationSuggest2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size"
+            android:clickable="true"
+            />
 
+        <TextView
+            android:id="@+id/stationSuggest3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size"
+            android:clickable="true"
+            />
 
-            <TextView
+        <TextView
+            android:id="@+id/stationSuggest4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size"
+            android:clickable="true"
+            />
+
+        <TextView
+            android:id="@+id/stationSuggest5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size"
+            android:clickable="true"
+            />
+
+        <TextView
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

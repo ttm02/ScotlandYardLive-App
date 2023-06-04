@@ -7,6 +7,7 @@ import dmax.dialog.SpotsDialog
 import java.lang.Thread.sleep
 import kotlin.math.abs
 import kotlin.math.cos
+import kotlin.math.roundToInt
 import kotlin.math.sqrt
 
 
@@ -33,10 +34,7 @@ class StationMap private constructor(
                         val reader = StationReader(context = context)
                         val data = reader.readStationsFromAssets()
 
-                        instance = StationMap(
-                            data,
-                            data.mapNotNull { (_, string) -> string }.toTypedArray()
-                        )
+                        instance = StationMap(data,data.mapNotNull { (_, string) -> string }.toTypedArray())
 
                         dialog.dismiss()
                     }
@@ -51,24 +49,39 @@ class StationMap private constructor(
     // initialized in constructor
     // TODO: use more efficient datastructure to find the closest station
 
+    fun get_nearest_stations(pos: Pair<Double, Double>, n: Int): List<Pair<String,Int>> {
 
-    fun get_nearest_station(pos: Pair<Double, Double>): String {
+        assert(n > 0)
+        assert(n < map.size)
 
 
-        var current_best: Triple<Pair<Double, Double>, Double, String> =
-            Triple(pos, Double.MAX_VALUE, "Out of Map")
+        var current_best: MutableList<Triple<Pair<Double, Double>, Double, String>> =
+            mutableListOf()
 
 
         map.forEach { (key, value) ->
             // Perform operation for each key-value pair
             val dist = distance(pos, key)
 
-            if (current_best.second > dist) {
-                current_best = Triple(key, dist, value)
+            var i = 0
+            var insert: Boolean = true
 
+            while (i < current_best.size && i < n) {
+
+                if (current_best[i].second > dist && insert) {
+                    current_best.add(i, Triple(key, dist, value))
+                    insert = false
+                    break
+                }
+                i++
             }
+            if (i < n && insert) {
+                current_best.add(i, Triple(key, dist, value))
+            }
+
         }
-        return current_best.third
+
+        return current_best.mapNotNull { (_, dist, string) -> Pair(string,dist.roundToInt()) }
     }
 
     fun distance(a: Pair<Double, Double>, b: Pair<Double, Double>): Double {
@@ -79,8 +92,7 @@ class StationMap private constructor(
 
     }
 
-
-    fun get_station_list(): Array<String> {
+    fun get_station_list():Array<String>{
         return list
     }
 
