@@ -91,17 +91,17 @@ class StationMap private constructor(
         return value * Math.PI / 180
     }
     //HaversineDistance
-    fun distance(a: Pair<Double, Double>, b: Pair<Double, Double>): Double {
+    fun distance(p1: Pair<Double, Double>, p2: Pair<Double, Double>): Double {
         val R = 6371000; // Radious of the earth in meters
 
 
         //val y_diff = (a.second - b.second) / 111320
         //val x_diff = (a.first - b.first) / 40075000 * cos(a.second) / 360
         //return sqrt(y_diff * y_diff + x_diff * x_diff)
-        val lat1 = a.second
-        val lat2 = b.second
-        val lon1 = a.first
-        val lon2 = b.first
+        val lat1 = p1.second
+        val lat2 = p2.second
+        val lon1 = p1.first
+        val lon2 = p2.first
 
         val latDistance = toRad(lat2 - lat1)
         val lonDistance = toRad(lon2 - lon1)
