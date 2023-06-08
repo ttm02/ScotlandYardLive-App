@@ -1,5 +1,6 @@
 package com.example.scotlandyardlive.ui.dashboard
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.scotlandyardlive.TeamLocations
 import com.example.scotlandyardlive.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -16,6 +18,9 @@ class DashboardFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private lateinit var thiscontext: Context
+
+    private lateinit var teamlocations : TeamLocations
 
     override fun onCreateView(
             inflater: LayoutInflater,
@@ -28,10 +33,10 @@ class DashboardFragment : Fragment() {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+        thiscontext = container!!.context
+
+        teamlocations= TeamLocations.getInstance(thiscontext)
+
         return root
     }
 

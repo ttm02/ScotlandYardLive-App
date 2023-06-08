@@ -1,0 +1,101 @@
+{
+  "TeamX": {
+    "Name": "X",
+    "Positions": [
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "S"
+      },
+      {
+        "Time": "11:32",
+        "Station": "Hauptwache",
+        "Transport": "U"
+      },
+      {
+        "Time": "11:55",
+        "Station": "Bockenheimer Warte",
+        "Transport": "U"
+      }
+    ]
+  },
+  "TeamBlau":
+  {
+    "Name": "Blau",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "R"
+      },
+      {
+        "Time": "11:40",
+        "Station": "Frankfurt Flughafen Regionalbahnhof",
+        "Transport": "B"
+      },
+      {
+        "Time": "12:00",
+        "Station": "Höchst Bahnhof",
+        "Transport": "S"
+      }
+    ]
+  },
+  "TeamRot":
+  {
+    "Name": "Rot",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "S"
+      },
+      {
+        "Time": "11:44",
+        "Station": "Frankfurt Südbahnhof",
+        "Transport": "S"
+      }
+    ]
+  },
+  "TeamGelb":
+  {
+    "Name": "Gelb",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "S"
+      },
+      {
+        "Time": "11:44",
+        "Station": "Frankfurt Südbahnhof",
+        "Transport": "S"
+      }
+    ]
+  },
+  "TeamGrün":
+  {
+    "Name": "Grün",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "S"
+
+      },
+      {
+        "Time": "11:30",
+        "Station": "Frankfurt Hauptwache",
+        "Transport": "S"
+      }
+    ]
+  },
+  "TeamOrange":
+  {
+    "Name": "Orange",
+    "Positions":[
+
+    ]
+  }
+
+
+}
