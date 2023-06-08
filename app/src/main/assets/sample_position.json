@@ -68,7 +68,7 @@
       {
         "Time": "11:44",
         "Station": "Frankfurt Südbahnhof",
-        "Transport": "S"
+        "Transport": "U"
       }
     ]
   },
@@ -96,6 +96,5 @@
 
     ]
   }
-
 
 }

@@ -42,7 +42,14 @@ class LocalTimeDeserializer : JsonDeserializer<LocalTime> {
     ): LocalTime {
         val timeString = json?.asString
         val timeFormatter = DateTimeFormatter.ofPattern("HH:mm")
+        try {
+            return LocalTime.parse(timeString, timeFormatter)
+        } catch (e: Exception) {
+            // Handle parsing exception, e.g., log an error or provide a default value
+            Log.w("Timedesirialize",e.message!!)
+        }
         return LocalTime.parse(timeString, timeFormatter)
+
     }
 }
 
