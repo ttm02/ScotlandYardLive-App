@@ -9,12 +9,17 @@
       },
       {
         "Time": "11:32",
-        "Station": "Hauptwache",
+        "Station": "hidden",
         "Transport": "U"
       },
       {
         "Time": "11:55",
         "Station": "Bockenheimer Warte",
+        "Transport": "T"
+      },
+      {
+        "Time": "12:04",
+        "Station": "hidden",
         "Transport": "U"
       }
     ]
