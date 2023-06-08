@@ -18,3 +18,9 @@ local.properties
 
 # ide specific files
 .idea
+# these pictures are from the RMV website, i do not know the License
+/app/src/main/res/drawable/r_pic.png
+/app/src/main/res/drawable/u_pic.png
+/app/src/main/res/drawable/s_pic.png
+/app/src/main/res/drawable/b_pic.png
+/app/src/main/res/drawable/t_pic.png
