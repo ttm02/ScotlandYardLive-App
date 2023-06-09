@@ -10,10 +10,11 @@ import android.widget.ImageView
 import android.widget.TextClock
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.Team
-import com.example.scotlandyardlive.TeamLocations
+import com.example.scotlandyardlive.TeamPositionsManager
 import com.example.scotlandyardlive.databinding.FragmentDashboardBinding
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -36,7 +37,7 @@ class DashboardFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var thiscontext: Context
 
-    private lateinit var teamlocations : TeamLocations
+    private lateinit var teamlocations : TeamPositionsManager
 
     private lateinit var teamview_x:TeamView_row
     private lateinit var teamview_rot:TeamView_row
@@ -58,7 +59,7 @@ class DashboardFragment : Fragment() {
 
         thiscontext = container!!.context
 
-        teamlocations= TeamLocations.getInstance(thiscontext)
+        teamlocations= TeamPositionsManager.getInstance(thiscontext)
 
         teamview_x= TeamView_row(binding.textView11,binding.textClock1,binding.imageView1,binding.textView1)
         teamview_rot=TeamView_row(binding.textView12,binding.textClock2,binding.imageView2,binding.textView2)
@@ -68,7 +69,15 @@ class DashboardFragment : Fragment() {
         teamview_orange=TeamView_row(binding.textView16,binding.textClock6,binding.imageView6,binding.textView6)
 
 
+        teamlocations.observe( getViewLifecycleOwner(), Observer<LocalTime> { update_time: LocalTime? ->
+            // Update the UI.
+            set_team_veiws()
+        }       )
+
         set_team_veiws()
+
+        teamlocations.request_updates()
+
         return root
     }
 

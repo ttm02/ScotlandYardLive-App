@@ -1,0 +1,44 @@
+{
+  "TeamX": {
+    "Name": "X",
+    "Positions": [
+
+    ]
+  },
+  "TeamBlau":
+  {
+    "Name": "Blau",
+    "Positions":[
+
+    ]
+  },
+  "TeamRot":
+  {
+    "Name": "Rot",
+    "Positions":[
+
+    ]
+  },
+  "TeamGelb":
+  {
+    "Name": "Gelb",
+    "Positions":[
+
+    ]
+  },
+  "TeamGrün":
+  {
+    "Name": "Grün",
+    "Positions":[
+
+    ]
+  },
+  "TeamOrange":
+  {
+    "Name": "Orange",
+    "Positions":[
+
+    ]
+  }
+
+}

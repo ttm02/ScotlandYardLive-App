@@ -24,3 +24,5 @@ local.properties
 /app/src/main/res/drawable/s_pic.png
 /app/src/main/res/drawable/b_pic.png
 /app/src/main/res/drawable/t_pic.png
+# the api key is a secret
+/app/src/main/assets/api_key.json
