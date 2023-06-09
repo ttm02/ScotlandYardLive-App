@@ -130,6 +130,7 @@ fun enqueue_downloadJsonFromCloudStorage(apiKey: String,fileName: String, downlo
             if (blob != null) {
                 val content: ByteArray = blob.getContent()
                 val text: String = content.toString(StandardCharsets.UTF_8)
+
                 downloadCallback.onDownloadComplete(text)
             } else {
                 downloadCallback.onDownloadError(Exception("File not found"))
@@ -242,6 +243,8 @@ class TeamPositionsManager private constructor(
     private fun finish_update() {
         val assertion =  team_update_counter.compareAndSet(num_teams,0)
         assert (assertion)
+        val assertion2 = team_update_in_progress.compareAndSet(true, false)
+        assert (assertion2)
 
         super.postValue(LocalTime.now())
     }
@@ -312,7 +315,6 @@ class TeamPositionsManager private constructor(
 
         // gives a json representation
         val json_string = team.tojson()
-        Log.d("TeamManagerUpdate",json_string)
         enqueue_UploadJsonToCloudStorage(download_api_key,team.Name+".json",json_string,this)
     }
 
