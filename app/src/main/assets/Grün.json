@@ -1,0 +1,27 @@
+{
+  "Team":
+  {
+    "Name": "Grün",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "S"
+
+      },
+      {
+        "Time": "11:30",
+        "Station": "Frankfurt Hauptwache",
+        "Transport": "S"
+      }
+    ]
+  },
+  "TeamOrange":
+  {
+    "Name": "Orange",
+    "Positions":[
+
+    ]
+  }
+
+}

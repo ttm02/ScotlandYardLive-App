@@ -200,9 +200,7 @@ class TeamPositionsManager private constructor(
             result,
             object : TypeToken<Map<String, Team>>() {}.type
         )
-        Log.d("DownloadComplete",result)
-        Log.d("DownloadComplete",teams.toString())
-        //assert(teams.size==1)
+
         val team = teams.entries.first().value
 
         var team_found=false

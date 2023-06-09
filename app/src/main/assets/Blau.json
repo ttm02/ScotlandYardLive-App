@@ -1,0 +1,23 @@
+{
+  "Team":
+  {
+    "Name": "Blau",
+    "Positions":[
+      {
+        "Time": "11:25",
+        "Station": "Frankfurt Hauptbahnhof",
+        "Transport": "R"
+      },
+      {
+        "Time": "11:40",
+        "Station": "Frankfurt Flughafen Regionalbahnhof",
+        "Transport": "B"
+      },
+      {
+        "Time": "12:00",
+        "Station": "Höchst Bahnhof",
+        "Transport": "S"
+      }
+    ]
+  }
+}
