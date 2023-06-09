@@ -12,6 +12,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.Team
 import com.example.scotlandyardlive.TeamPositionsManager
@@ -68,7 +69,12 @@ class DashboardFragment : Fragment() {
         teamview_gelb=TeamView_row(binding.textView15,binding.textClock5,binding.imageView5,binding.textView5)
         teamview_orange=TeamView_row(binding.textView16,binding.textClock6,binding.imageView6,binding.textView6)
 
-
+        set_temview_on_click_listener("X",teamview_x)
+        set_temview_on_click_listener("Rot",teamview_rot)
+        set_temview_on_click_listener("Blau",teamview_blau)
+        set_temview_on_click_listener("Grün",teamview_grün)
+        set_temview_on_click_listener("Gelb",teamview_gelb)
+        set_temview_on_click_listener("Orange",teamview_orange)
         teamlocations.observe( getViewLifecycleOwner(), Observer<LocalTime> { update_time: LocalTime? ->
             // Update the UI.
             set_team_veiws()
@@ -80,6 +86,35 @@ class DashboardFragment : Fragment() {
         //teamlocations.request_updates()
 
         return root
+    }
+
+    fun set_temview_on_click_listener( teamName:String, row:TeamView_row){
+        row.team_name.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("Team", teamName)
+            val navController = findNavController()
+            navController.navigate(R.id.action_navigation_dashboard_to_tourDetailFragment2, bundle)
+        }
+        row.time.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("Team", teamName)
+            val navController = findNavController()
+            navController.navigate(R.id.action_navigation_dashboard_to_tourDetailFragment2, bundle)
+        }
+        row.image.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("Team", teamName)
+            val navController = findNavController()
+            navController.navigate(R.id.action_navigation_dashboard_to_tourDetailFragment2, bundle)
+        }
+        row.stationText.setOnClickListener {
+            val bundle = Bundle()
+            bundle.putString("Team", teamName)
+            val navController = findNavController()
+            navController.navigate(R.id.action_navigation_dashboard_to_tourDetailFragment2, bundle)
+        }
+
+
     }
 
     fun set_team_veiw( t: Team,  row:TeamView_row){

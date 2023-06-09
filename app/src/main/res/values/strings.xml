@@ -8,4 +8,5 @@
     <string name="confirm_button">Ortsmeldung Abgeben!</string>
     <string name="include_location">mit Position melden</string>
     <string name="emptysuggestion">--locate nearest Stations--</string>
+    <string name="historie_caption">Historie: %s</string>
 </resources>

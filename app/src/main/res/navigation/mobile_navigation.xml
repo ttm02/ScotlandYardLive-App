@@ -9,17 +9,35 @@
         android:id="@+id/navigation_home"
         android:name="com.example.scotlandyardlive.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_navigation_dashboard"
+            app:destination="@id/navigation_dashboard" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
         android:name="com.example.scotlandyardlive.ui.dashboard.DashboardFragment"
         android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_dashboard" >
+        <action
+            android:id="@+id/action_navigation_dashboard_to_tourDetailFragment2"
+            app:destination="@id/tourDetailFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.example.scotlandyardlive.ui.map.MapFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_map" />
+    <fragment
+        android:id="@+id/tourDetailFragment"
+        android:name="com.example.scotlandyardlive.TourDetailFragment"
+        android:label="fragment_tour_detail"
+        tools:layout="@layout/fragment_tour_detail" >
+        <argument
+            android:name="Team"
+            app:argType="string"
+            android:defaultValue="X" />
+    </fragment>
 </navigation>

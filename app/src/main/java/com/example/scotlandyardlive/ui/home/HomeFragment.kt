@@ -21,6 +21,7 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.scotlandyardlive.Position
 import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.StationMap
@@ -347,6 +348,9 @@ class HomeFragment : Fragment() {
         }else{
         Toast.makeText(requireContext(), "Position Gemeldet", Toast.LENGTH_SHORT).show()
         }
+
+        // go to dashboard
+        findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
     }
 
 

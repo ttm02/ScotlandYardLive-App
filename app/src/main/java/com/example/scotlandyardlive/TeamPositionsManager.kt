@@ -231,6 +231,23 @@ class TeamPositionsManager private constructor(
         return teamlist
     }
 
+    fun getteam(name:String): Team {
+        var teamPos=-1
+        var team_found=false
+        for (i in teamlist.indices){
+            if (name == teamlist[i].Name){
+                assert(!team_found)
+                team_found=true
+                teamPos=i
+                //break
+                // one could break but our assertion checks that we found only one match
+            }
+        }
+        assert(team_found)
+
+        return teamlist[teamPos]
+    }
+
     fun request_updates() {
         if (team_update_in_progress.compareAndSet(false, true)){
             // if no update in progress:
