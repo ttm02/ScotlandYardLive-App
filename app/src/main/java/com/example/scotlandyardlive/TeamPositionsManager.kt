@@ -10,6 +10,7 @@ import androidx.lifecycle.LiveData
 import com.google.auth.oauth2.AccessToken
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.storage.BlobId
+import com.google.cloud.storage.BlobInfo
 import com.google.gson.JsonDeserializer
 import com.google.gson.JsonElement
 import com.google.gson.annotations.JsonAdapter
@@ -23,6 +24,9 @@ import java.lang.reflect.Type
 
 import com.google.cloud.storage.Storage
 import com.google.cloud.storage.StorageOptions
+import com.google.gson.JsonPrimitive
+import com.google.gson.JsonSerializationContext
+import com.google.gson.JsonSerializer
 import java.io.ByteArrayOutputStream
 import java.nio.charset.StandardCharsets
 
@@ -37,18 +41,38 @@ import java.util.concurrent.atomic.AtomicInteger
 
 data class Team(
     val Name: String,
-    val Positions: MutableList<Position>
-)
+    val Positions: MutableList<Position>,
+) {
+    fun tojson(): String {
+        // TODO should we save the gson reader instead of rebuilding it?
+        val gson = GsonBuilder()
+            .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
+            .create()
+
+        return "{\"Team\":"+gson.toJson(this)+"}"
+    }
+}
 
 data class Position(
-    @JsonAdapter(LocalTimeDeserializer::class)
+    @JsonAdapter(LocalTimeSerializer::class)
     val Time: LocalTime,
     val Station: String,
     val Transport: String
 )
 
-// String to LocalTime object
-class LocalTimeDeserializer : JsonDeserializer<LocalTime> {
+//TODO we actually dont need to serialize all the time we could just keep the strings around
+
+class LocalTimeSerializer : JsonSerializer<LocalTime>,JsonDeserializer<LocalTime> {
+    // LocalTime object to String
+    override fun serialize(
+        localTime: LocalTime,
+        type: Type,
+        jsonSerializationContext: JsonSerializationContext
+    ): JsonElement {
+        val formattedTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+        return JsonPrimitive(formattedTime)
+    }
+    // String to LocalTime object
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,
@@ -63,7 +87,6 @@ class LocalTimeDeserializer : JsonDeserializer<LocalTime> {
             Log.w("Timedesirialize", e.message!!)
         }
         return LocalTime.parse(timeString, timeFormatter)
-
     }
 }
 
@@ -115,12 +138,48 @@ fun enqueue_downloadJsonFromCloudStorage(apiKey: String,fileName: String, downlo
             downloadCallback.onDownloadError(e)
         }
     }
+}
 
+fun enqueue_UploadJsonToCloudStorage(apiKey: String,fileName: String,json: String, uploadCallback: UploadCallback) {
+
+    //val  ByteArrayInputStream stream = ByteArrayInputStream(credential.getBytes(StandardCharsets.UTF_8));
+
+    val inputStream: InputStream = ByteArrayInputStream(apiKey.toByteArray())
+    val credentials = GoogleCredentials.fromStream(inputStream)
+    val storage: Storage = StorageOptions.newBuilder()
+        .setProjectId("scotlandyardliveapp")
+        .setCredentials(credentials)
+        .build().service
+
+    val bucketName = "scotlandyardlivejson"
+
+    GlobalScope.launch(Dispatchers.IO) {
+        try {
+            val blobId = BlobId.of(bucketName, fileName)
+            val blobInfo = BlobInfo.newBuilder(blobId).build()
+
+            //TODO we could do some sotz of check if there was a conflicting update
+
+            val jsonStringBytes = json.toByteArray(Charsets.UTF_8)
+            storage.create(blobInfo, jsonStringBytes)
+
+
+             uploadCallback.onUploadComplete()
+
+        } catch (e: Exception) {
+            uploadCallback.onUploadError(e)
+        }
+    }
 }
 
 interface DownloadCallback {
     fun onDownloadComplete(result: String)
     fun onDownloadError(error: Exception)
+}
+
+interface UploadCallback {
+    fun onUploadComplete( )
+    fun onUploadError(error: Exception)
 }
 
 class TeamPositionsManager private constructor(
@@ -130,7 +189,7 @@ class TeamPositionsManager private constructor(
     private var team_update_counter: AtomicInteger = AtomicInteger(0) ,
     private var team_update_in_progress: AtomicBoolean = AtomicBoolean(false) ,
     private val num_teams: Int = 6
-) : LiveData<LocalTime>(), DownloadCallback {
+) : LiveData<LocalTime>(), DownloadCallback,UploadCallback {
 
     // Singelton pattern: getinstance
     companion object {
@@ -144,7 +203,7 @@ class TeamPositionsManager private constructor(
                     if (instance == null) {
 
                         val gson = GsonBuilder()
-                            .registerTypeAdapter(LocalTime::class.java, LocalTimeDeserializer())
+                            .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
                             .create()
 
                         val jsonString = loadJSONFromAsset(context, "empty_positions.json")
@@ -172,7 +231,6 @@ class TeamPositionsManager private constructor(
     }
 
     fun request_updates() {
-        //TODO
         if (team_update_in_progress.compareAndSet(false, true)){
             // if no update in progress:
             for (t in teamlist){
@@ -193,7 +251,7 @@ class TeamPositionsManager private constructor(
 
         // TODO should we save the gson reader instead of rebuilding it?
         val gson = GsonBuilder()
-            .registerTypeAdapter(LocalTime::class.java, LocalTimeDeserializer())
+            .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
             .create()
 
         val teams: Map<String, Team> = gson.fromJson(
@@ -221,6 +279,48 @@ class TeamPositionsManager private constructor(
     }
 
     override fun onDownloadError(error: Exception) {
+        // Handle the download error here
+
+        Log.e("TeamManager", "Json Update Failed")
+        if (error.message != null) {
+            Log.e("TeamManager", error.message!!)
+        }
+
+        val count = team_update_counter.incrementAndGet()
+        if (count == num_teams){
+            finish_update()}
+    }
+
+    fun add_position (TeamName: String, pos: Position){
+
+        var teamPos=-1
+        var team_found=false
+        for (i in teamlist.indices){
+            if (TeamName == teamlist[i].Name){
+                assert(!team_found)
+                team_found=true
+                teamPos=i
+                //break
+                // one could break but our assertion checks that we found only one match
+            }
+        }
+        assert(team_found)
+
+        val team = teamlist[teamPos]
+
+        team.Positions.add(pos)
+
+        // gives a json representation
+        val json_string = team.tojson()
+        Log.d("TeamManagerUpdate",json_string)
+        enqueue_UploadJsonToCloudStorage(download_api_key,team.Name+".json",json_string,this)
+    }
+
+    override fun onUploadComplete() {
+        request_updates()
+    }
+
+    override fun onUploadError(error: Exception) {
         // Handle the download error here
 
         Log.e("TeamManager", "Json Update Failed")

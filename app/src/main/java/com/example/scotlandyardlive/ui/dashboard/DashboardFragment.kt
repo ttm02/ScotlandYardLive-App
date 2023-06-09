@@ -74,9 +74,10 @@ class DashboardFragment : Fragment() {
             set_team_veiws()
         }       )
 
-        set_team_veiws()
-
-        teamlocations.request_updates()
+        // will be used in on resume:
+        //set_team_veiws()
+        // update will only trigger, if one send its location
+        //teamlocations.request_updates()
 
         return root
     }
@@ -126,6 +127,11 @@ class DashboardFragment : Fragment() {
         }else{
             row.stationText.text = "no known location"
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        set_team_veiws()
     }
 
     fun set_team_veiws(){

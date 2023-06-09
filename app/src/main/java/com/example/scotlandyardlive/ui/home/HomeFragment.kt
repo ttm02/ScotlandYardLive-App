@@ -11,6 +11,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.RadioButton
 import android.widget.Spinner
@@ -19,8 +21,10 @@ import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.scotlandyardlive.Position
 import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.StationMap
+import com.example.scotlandyardlive.TeamPositionsManager
 import com.example.scotlandyardlive.databinding.FragmentHomeBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationRequest
@@ -28,6 +32,7 @@ import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.CancellationToken
 import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.android.gms.tasks.OnTokenCanceledListener
+import java.time.LocalTime
 
 
 class HomeFragment : Fragment() {
@@ -68,6 +73,12 @@ class HomeFragment : Fragment() {
     private lateinit var stationsuggest_val3:String
     private lateinit var stationsuggest_val4:String
     private lateinit var stationsuggest_val5:String
+
+
+    private lateinit var sendButton : Button
+    private lateinit var teamposManager: TeamPositionsManager
+
+    private lateinit var position_check_box: CheckBox
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -207,6 +218,12 @@ class HomeFragment : Fragment() {
         stationsuggest4.setOnClickListener { stationtextview.setText(stationsuggest_val4) }
         stationsuggest5.setOnClickListener { stationtextview.setText(stationsuggest_val5) }
 
+        sendButton = binding.buttonSendPos
+        sendButton.setOnClickListener { send_location_update() }
+
+        teamposManager = TeamPositionsManager.getInstance(thiscontext)
+
+        position_check_box=binding.checkBox
         return root
     }
 
@@ -288,6 +305,48 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun send_location_update(){
+
+        var transport ="-"
+        if (buttonR.isChecked){
+            assert(transport=="-")
+            transport="R"
+        }
+        else if (buttonB.isChecked) {
+            assert(transport == "-")
+            transport = "B"
+        } else if (buttonU.isChecked) {
+            assert(transport == "-")
+            transport = "U"
+        } else if (buttonS.isChecked) {
+            assert(transport == "-")
+            transport = "S"
+        } else if (buttonT.isChecked) {
+            assert(transport == "-")
+            transport = "T"
+        }
+        assert(transport !="-")
+
+        var group= spinner_group_selection.selectedItem.toString()
+        if (group== "MR X")
+            group="X"
+        // X is the internal name but MR X is displayed
+        var station=stationtextview.text.toString()
+
+        if  (group=="X" && !position_check_box.isChecked){
+            station="hidden"
+        }
+        val new_loc: Position= Position(LocalTime.now(),station,transport)
+
+        teamposManager.add_position(group,new_loc)
+
+        if  (group=="X" && !position_check_box.isChecked){
+            Toast.makeText(requireContext(), "Umstieg ohne Position Gemeldet", Toast.LENGTH_SHORT).show()
+        }else{
+        Toast.makeText(requireContext(), "Position Gemeldet", Toast.LENGTH_SHORT).show()
+        }
     }
 
 
