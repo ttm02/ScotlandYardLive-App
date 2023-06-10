@@ -88,10 +88,23 @@ class TourDetailFragment : Fragment() {
             val image= ImageView(context)
             val stationText= TextView(context)
 
-            time.setTextSize(TypedValue.COMPLEX_UNIT_SP, resources.getDimension(R.dimen.font_size))
-            stationText.setTextSize(TypedValue.COMPLEX_UNIT_SP, resources.getDimension(R.dimen.font_size))
+            // Layout Parameters
+            val layoutParams = TableRow.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
 
-            // time
+            val textSizeInSp = resources.getDimension(R.dimen.font_size)/2
+
+            val scale = resources.displayMetrics.scaledDensity
+            val textSizeInPx = (textSizeInSp * scale).toInt()
+
+            time.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
+            stationText.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSizeInPx.toFloat())
+            time.layoutParams = layoutParams
+            stationText.layoutParams = layoutParams
+
+              // time
             val formatter = DateTimeFormatter.ofPattern("HH:mm")
             time.text = position.Time.format(formatter)
 
@@ -124,6 +137,9 @@ class TourDetailFragment : Fragment() {
 
             // station
             stationText.text = position.Station
+
+
+
 
             row.addView(time)
             row.addView(image)
