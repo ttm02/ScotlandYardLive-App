@@ -32,4 +32,9 @@ class MainActivity : AppCompatActivity() {
         // read in the station map
         var stations = StationMap.getInstance(this)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 }

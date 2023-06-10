@@ -33,18 +33,18 @@
     <fragment
         android:id="@+id/tourDetailFragment"
         android:name="com.example.scotlandyardlive.TourDetailFragment"
-        android:label="fragment_tour_detail"
-        tools:layout="@layout/fragment_tour_detail" >
+        android:label="@string/detailview_caption"
+        tools:layout="@layout/fragment_tour_detail">
         <argument
             android:name="Team"
-            app:argType="string"
-            android:defaultValue="X" />
+            android:defaultValue="X"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/teamSelectionFragment"
         android:name="com.example.scotlandyardlive.TeamSelectionFragment"
-        android:label="fragment_team_selection"
-        tools:layout="@layout/fragment_team_selection" >
+        android:label="@string/team_selection_caption"
+        tools:layout="@layout/fragment_team_selection">
         <action
             android:id="@+id/action_teamSelectionFragment_to_navigation_home"
             app:destination="@id/navigation_home"
