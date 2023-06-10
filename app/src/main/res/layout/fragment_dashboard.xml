@@ -23,7 +23,8 @@
                     android:id="@+id/textView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mr X:  "
+                    android:text="Mr X:"
+                    android:textColor="@color/black"
                     android:textSize="@dimen/font_size" />
 
                 <TextView
@@ -53,8 +54,8 @@
                     android:id="@+id/textView12"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
-                    android:text="Rot:   "
+                    android:text="Rot:"
+                    android:textColor="@color/red"
                     android:textSize="@dimen/font_size" />
 
                 <TextView
@@ -84,7 +85,8 @@
                     android:id="@+id/textView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Blau:  "
+                    android:text="Blau:"
+                    android:textColor="@color/blue"
                     android:textSize="@dimen/font_size" />
 
                 <TextView
@@ -113,7 +115,8 @@
                     android:id="@+id/textView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Grün:  "
+                    android:text="Grün:"
+                    android:textColor="@color/green"
                     android:textSize="@dimen/font_size" />
 
                 <TextView
@@ -143,7 +146,8 @@
                     android:id="@+id/textView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gelb:  "
+                    android:text="Gelb:"
+                    android:textColor="@color/yellow"
                     android:textSize="@dimen/font_size" />
 
                 <TextView
@@ -174,6 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Orange:"
+                    android:textColor="@color/orange"
                     android:textSize="@dimen/font_size" />
 
                 <TextView

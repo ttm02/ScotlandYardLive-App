@@ -22,30 +22,35 @@
             android:id="@+id/buttonX"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:text="MR X" />
 
         <Button
             android:id="@+id/buttonBlau"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/blue"
             android:text="Detektiv: Blau" />
 
         <Button
             android:id="@+id/buttonRot"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/red"
             android:text="Detektiv: Rot" />
 
         <Button
             android:id="@+id/buttonGelb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/yellow"
             android:text="Detektiv: Gelb" />
 
         <Button
             android:id="@+id/buttonGruen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/green"
             android:text="Detektiv: Grün" />
 
         <Button
@@ -57,6 +62,7 @@
         <TextView
             android:id="@+id/textViewMsg"
             android:layout_width="match_parent"
+            android:textColor="@color/orange"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
