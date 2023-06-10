@@ -1,5 +1,7 @@
 package com.example.scotlandyardlive
 
+import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.util.TypedValue
@@ -11,6 +13,7 @@ import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.scotlandyardlive.databinding.FragmentTourDetailBinding
 import java.time.format.DateTimeFormatter
 
@@ -84,9 +87,9 @@ class TourDetailFragment : Fragment() {
 
             //TODO this is some duplicate code...
 
-            val time= TextView(context)
-            val image= ImageView(context)
-            val stationText= TextView(context)
+            val time = TextView(context)
+            val image = ImageView(context)
+            val stationText = TextView(context)
 
             // Layout Parameters
             val layoutParams = TableRow.LayoutParams(
@@ -94,7 +97,7 @@ class TourDetailFragment : Fragment() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
 
-            val textSizeInSp = resources.getDimension(R.dimen.font_size)/2
+            val textSizeInSp = resources.getDimension(R.dimen.font_size) / 2
 
             val scale = resources.displayMetrics.scaledDensity
             val textSizeInPx = (textSizeInSp * scale).toInt()
@@ -104,7 +107,7 @@ class TourDetailFragment : Fragment() {
             time.layoutParams = layoutParams
             stationText.layoutParams = layoutParams
 
-              // time
+            // time
             val formatter = DateTimeFormatter.ofPattern("HH:mm")
             time.text = position.Time.format(formatter)
 
@@ -147,7 +150,34 @@ class TourDetailFragment : Fragment() {
             tableLayout.addView(row)
 
         }
+        // the hex value
+        var color = resources.getColor(R.color.black)
+
+        when (Teamname) {
+            "X" -> color = resources.getColor(R.color.black)
+            "Rot" -> color = resources.getColor(R.color.red)
+            "Grün" -> color = resources.getColor(R.color.green)
+            "Blau" -> color = resources.getColor(R.color.blue)
+            "Gelb" -> color = resources.getColor(R.color.yellow)
+            "Orange" -> resources.getColor(R.color.black)
+        }
+
+//            activity?.actionBar?.setBackgroundDrawable(ColorDrawable(color))
+        activity?.window?.statusBarColor = color
+        activity?.window?.navigationBarColor = color
 
 
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+
+        var color = resources.getColor(R.color.purple_500)
+
+        // this does not work :-(
+        //activity?.actionBar?.setBackgroundDrawable(ColorDrawable(color))
+        activity?.window?.statusBarColor = color
+        activity?.window?.navigationBarColor = color
     }
 }
