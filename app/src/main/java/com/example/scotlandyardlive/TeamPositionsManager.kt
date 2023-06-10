@@ -214,6 +214,10 @@ class TeamPositionsManager private constructor(
             return instance!!
         }
 
+        fun check_if_instance_is_created():Boolean{
+            return instance!=null
+        }
+
         @MainThread
         fun createdInstance(context: Context, selectedTeam: String) {
             assert(instance == null)

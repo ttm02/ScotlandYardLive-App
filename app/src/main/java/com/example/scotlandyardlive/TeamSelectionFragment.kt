@@ -56,6 +56,16 @@ class TeamSelectionFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (TeamPositionsManager.check_if_instance_is_created()){
+            // a team was already selected
+            val navController = findNavController()
+            navController.navigate(R.id.action_teamSelectionFragment_to_navigation_home)
+        }
+
+    }
+
     fun select_team(team: String){
 
         TeamPositionsManager.createdInstance(requireContext(),team)
