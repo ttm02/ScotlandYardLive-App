@@ -15,12 +15,12 @@
 
         <TextView
             android:id="@+id/text_home"
-            android:text="Ortsmeldung"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:text="Ortsmeldung"
             android:textAlignment="center"
             android:textSize="@dimen/font_size" />
 
@@ -82,15 +82,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="AutoCompleteTextView"
-                android:textSize="@dimen/font_size"/>
+                android:textSize="@dimen/font_size" />
 
             <ImageButton
                 android:id="@+id/imageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@android:drawable/ic_menu_mylocation"
+                android:contentDescription="Locate"
                 android:minWidth="12sp"
-                android:contentDescription="Locate" />
+                android:src="@android:drawable/ic_menu_mylocation" />
 
         </LinearLayout>
 
@@ -99,105 +99,101 @@
             android:id="@+id/stationSuggest1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/emptysuggestion"
-            android:textSize="@dimen/font_size"
             android:clickable="true"
-            />
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size" />
 
         <TextView
             android:id="@+id/stationSuggest2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/emptysuggestion"
-            android:textSize="@dimen/font_size"
             android:clickable="true"
-            />
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size" />
 
         <TextView
             android:id="@+id/stationSuggest3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/emptysuggestion"
-            android:textSize="@dimen/font_size"
             android:clickable="true"
-            />
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size" />
 
         <TextView
             android:id="@+id/stationSuggest4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/emptysuggestion"
-            android:textSize="@dimen/font_size"
             android:clickable="true"
-            />
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size" />
 
         <TextView
             android:id="@+id/stationSuggest5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/emptysuggestion"
-            android:textSize="@dimen/font_size"
             android:clickable="true"
-            />
+            android:text="@string/emptysuggestion"
+            android:textSize="@dimen/font_size" />
 
         <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Verkehrsmittel:"
-                android:textSize="@dimen/font_size" />
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Verkehrsmittel:"
+            android:textSize="@dimen/font_size" />
 
-            <TableLayout
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radioButtonR"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Regio" />
 
-                    <RadioButton
-                        android:id="@+id/radioButtonR"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Regio" />
+                <RadioButton
+                    android:id="@+id/radioButtonU"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="U-Bahn" />
 
-                    <RadioButton
-                        android:id="@+id/radioButtonU"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="U-Bahn" />
+                <RadioButton
+                    android:id="@+id/radioButtonS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="S-Bahn" />
+            </TableRow>
 
-                    <RadioButton
-                        android:id="@+id/radioButtonS"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="S-Bahn" />
-                </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <RadioButton
+                    android:id="@+id/radioButtonT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tram" />
 
-                    <RadioButton
-                        android:id="@+id/radioButtonT"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tram" />
+                <RadioButton
+                    android:id="@+id/radioButtonB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bus" />
+                <!--
+                                    <RadioButton
+                                        android:id="@+id/radioButtonM"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Metro-Bus" />
+                 -->
+            </TableRow>
 
-                    <RadioButton
-                        android:id="@+id/radioButtonB"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Bus" />
-
-                    <RadioButton
-                        android:id="@+id/radioButtonM"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Metro-Bus" />
-                </TableRow>
-
-            </TableLayout>
+        </TableLayout>
 
         <CheckBox
             android:id="@+id/checkBox"

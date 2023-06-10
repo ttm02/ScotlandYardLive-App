@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
     private lateinit var buttonU: RadioButton
     private lateinit var buttonT: RadioButton
     private lateinit var buttonB: RadioButton
-    private lateinit var buttonM: RadioButton
+    //private lateinit var buttonM: RadioButton
 
     // FusedLocationProviderClient - Main class for receiving location updates.
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -63,20 +63,20 @@ class HomeFragment : Fragment() {
     private lateinit var stationtextview: AutoCompleteTextView
     private lateinit var buttonLocate: ImageButton
 
-    private lateinit var stationsuggest1:TextView
-    private lateinit var stationsuggest2:TextView
-    private lateinit var stationsuggest3:TextView
-    private lateinit var stationsuggest4:TextView
-    private lateinit var stationsuggest5:TextView
+    private lateinit var stationsuggest1: TextView
+    private lateinit var stationsuggest2: TextView
+    private lateinit var stationsuggest3: TextView
+    private lateinit var stationsuggest4: TextView
+    private lateinit var stationsuggest5: TextView
 
-    private lateinit var stationsuggest_val1:String
-    private lateinit var stationsuggest_val2:String
-    private lateinit var stationsuggest_val3:String
-    private lateinit var stationsuggest_val4:String
-    private lateinit var stationsuggest_val5:String
+    private lateinit var stationsuggest_val1: String
+    private lateinit var stationsuggest_val2: String
+    private lateinit var stationsuggest_val3: String
+    private lateinit var stationsuggest_val4: String
+    private lateinit var stationsuggest_val5: String
 
 
-    private lateinit var sendButton : Button
+    private lateinit var sendButton: Button
     private lateinit var teamposManager: TeamPositionsManager
 
     private lateinit var position_check_box: CheckBox
@@ -109,14 +109,13 @@ class HomeFragment : Fragment() {
         stationsuggest5 = binding.stationSuggest5
 
 
-
         // the radio buttons
         buttonS = binding.radioButtonS
         buttonR = binding.radioButtonR
         buttonU = binding.radioButtonU
         buttonT = binding.radioButtonT
         buttonB = binding.radioButtonB
-        buttonM = binding.radioButtonM
+        //buttonM = binding.radioButtonM
 
         buttonS.setOnClickListener {
             buttonS.isChecked = true
@@ -124,7 +123,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = false
-            buttonM.isChecked = false
+            //buttonM.isChecked = false
         }
 
         buttonR.setOnClickListener {
@@ -133,7 +132,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = false
-            buttonM.isChecked = false
+            //buttonM.isChecked = false
         }
 
         buttonU.setOnClickListener {
@@ -142,7 +141,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = true
             buttonT.isChecked = false
             buttonB.isChecked = false
-            buttonM.isChecked = false
+            //buttonM.isChecked = false
         }
 
         buttonT.setOnClickListener {
@@ -151,7 +150,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = true
             buttonB.isChecked = false
-            buttonM.isChecked = false
+            //buttonM.isChecked = false
         }
 
         buttonB.setOnClickListener {
@@ -160,9 +159,10 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = true
-            buttonM.isChecked = false
+            //buttonM.isChecked = false
         }
 
+        /*
         buttonM.setOnClickListener {
             buttonS.isChecked = false
             buttonR.isChecked = false
@@ -171,6 +171,7 @@ class HomeFragment : Fragment() {
             buttonB.isChecked = false
             buttonM.isChecked = true
         }
+        */
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(thiscontext)
 
@@ -220,30 +221,30 @@ class HomeFragment : Fragment() {
 
 
 
-        position_check_box=binding.checkBox
+        position_check_box = binding.checkBox
 
-        if (teamposManager.getCurrentTeamName()!="MR X"){
-            position_check_box.isChecked=true
-            position_check_box.isEnabled=false
+        if (teamposManager.getCurrentTeamName() != "MR X") {
+            position_check_box.isChecked = true
+            position_check_box.isEnabled = false
         }
         return root
     }
 
     private fun update_station_suggestion() {
         var stations = StationMap.getInstance(thiscontext)
-        val nearest_stations = stations.get_nearest_stations(Pair(pos_x, pos_y),5)
+        val nearest_stations = stations.get_nearest_stations(Pair(pos_x, pos_y), 5)
 
 
         stationsuggest1.setText("${nearest_stations[0].first} (${nearest_stations[0].second}m)")
-        stationsuggest_val1=nearest_stations[0].first
+        stationsuggest_val1 = nearest_stations[0].first
         stationsuggest2.setText("${nearest_stations[1].first} (${nearest_stations[1].second}m)")
-        stationsuggest_val2=nearest_stations[1].first
+        stationsuggest_val2 = nearest_stations[1].first
         stationsuggest3.setText("${nearest_stations[2].first} (${nearest_stations[2].second}m)")
-        stationsuggest_val3=nearest_stations[2].first
+        stationsuggest_val3 = nearest_stations[2].first
         stationsuggest4.setText("${nearest_stations[3].first} (${nearest_stations[3].second}m)")
-        stationsuggest_val4=nearest_stations[3].first
+        stationsuggest_val4 = nearest_stations[3].first
         stationsuggest5.setText("${nearest_stations[4].first} (${nearest_stations[4].second}m)")
-        stationsuggest_val5=nearest_stations[4].first
+        stationsuggest_val5 = nearest_stations[4].first
         //stationtextview.setText(nearest_station)
 
     }
@@ -267,13 +268,13 @@ class HomeFragment : Fragment() {
                             pos_y = it.latitude
                             pos_x = it.longitude
                             update_station_suggestion()
-                        }else
-                            Toast.makeText(thiscontext, "cannot get Location", Toast.LENGTH_SHORT).show()
+                        } else
+                            Toast.makeText(thiscontext, "cannot get Location", Toast.LENGTH_SHORT)
+                                .show()
                     }
                 }
 
-        }
-        catch (s: SecurityException){
+        } catch (s: SecurityException) {
             Toast.makeText(thiscontext, "no permission to get location", Toast.LENGTH_SHORT).show()
         }
     }
@@ -309,14 +310,13 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun send_location_update(){
+    private fun send_location_update() {
 
-        var transport ="-"
-        if (buttonR.isChecked){
-            assert(transport=="-")
-            transport="R"
-        }
-        else if (buttonB.isChecked) {
+        var transport = "-"
+        if (buttonR.isChecked) {
+            assert(transport == "-")
+            transport = "R"
+        } else if (buttonB.isChecked) {
             assert(transport == "-")
             transport = "B"
         } else if (buttonU.isChecked) {
@@ -329,28 +329,28 @@ class HomeFragment : Fragment() {
             assert(transport == "-")
             transport = "T"
         }
-        assert(transport !="-")
+        assert(transport != "-")
 
 
-        var station=stationtextview.text.toString()
+        var station = stationtextview.text.toString()
 
-        if  (teamposManager.getCurrentTeamName()=="MR X" && !position_check_box.isChecked){
-            station="hidden"
+        if (teamposManager.getCurrentTeamName() == "MR X" && !position_check_box.isChecked) {
+            station = "hidden"
         }
-        val new_loc: Position= Position(LocalTime.now(),station,transport)
+        val new_loc: Position = Position(LocalTime.now(), station, transport)
 
         teamposManager.add_position(new_loc)
 
-        if  (teamposManager.getCurrentTeamName()=="MR X" && !position_check_box.isChecked){
-            Toast.makeText(requireContext(), "Umstieg ohne Position Gemeldet", Toast.LENGTH_SHORT).show()
-        }else{
-        Toast.makeText(requireContext(), "Position Gemeldet", Toast.LENGTH_SHORT).show()
+        if (teamposManager.getCurrentTeamName() == "MR X" && !position_check_box.isChecked) {
+            Toast.makeText(requireContext(), "Umstieg ohne Position Gemeldet", Toast.LENGTH_SHORT)
+                .show()
+        } else {
+            Toast.makeText(requireContext(), "Position Gemeldet", Toast.LENGTH_SHORT).show()
         }
 
         // go to dashboard
         findNavController().navigate(R.id.action_navigation_home_to_navigation_dashboard)
     }
-
 
 
 }
