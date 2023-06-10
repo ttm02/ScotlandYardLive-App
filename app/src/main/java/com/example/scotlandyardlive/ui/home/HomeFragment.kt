@@ -99,6 +99,16 @@ class HomeFragment : Fragment() {
         teamposManager = TeamPositionsManager.getInstance()
 
         teamText.text = teamposManager.getCurrentTeamName()
+        var color =  teamText.textColors.defaultColor
+        when (teamposManager.getCurrentTeamName()) {
+            "MR X" -> color = resources.getColor(R.color.black)
+            "Rot" -> color = resources.getColor(R.color.red)
+            "Grün" -> color = resources.getColor(R.color.green)
+            "Blau" -> color = resources.getColor(R.color.blue)
+            "Gelb" -> color = resources.getColor(R.color.yellow)
+            "Orange" -> resources.getColor(R.color.black)
+        }
+        teamText.setTextColor(color)
 
 
 
