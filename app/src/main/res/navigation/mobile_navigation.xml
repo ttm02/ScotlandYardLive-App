@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/teamSelectionFragment">
 
     <fragment
         android:id="@+id/navigation_home"
@@ -39,5 +39,17 @@
             android:name="Team"
             app:argType="string"
             android:defaultValue="X" />
+    </fragment>
+    <fragment
+        android:id="@+id/teamSelectionFragment"
+        android:name="com.example.scotlandyardlive.TeamSelectionFragment"
+        android:label="fragment_team_selection"
+        tools:layout="@layout/fragment_team_selection" >
+        <action
+            android:id="@+id/action_teamSelectionFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:launchSingleTop="false"
+            app:popUpTo="@id/teamSelectionFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

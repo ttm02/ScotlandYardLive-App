@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        // read in the station map
         var stations = StationMap.getInstance(this)
     }
 }

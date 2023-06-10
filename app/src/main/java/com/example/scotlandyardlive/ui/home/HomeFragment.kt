@@ -45,7 +45,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var thiscontext: Context
-    private lateinit var spinner_group_selection: Spinner
+    private lateinit var teamText: TextView
     private lateinit var buttonR: RadioButton
     private lateinit var buttonS: RadioButton
     private lateinit var buttonU: RadioButton
@@ -94,16 +94,12 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val data = thiscontext.resources.getStringArray(R.array.groups)
-        spinner_group_selection = binding.spinnerGroupSelection
+        teamText = binding.textViewGroup
 
-        // Create an ArrayAdapter using the array and default spinner layout
-        val adapter = ArrayAdapter(thiscontext, android.R.layout.simple_spinner_item, data)
+        teamposManager = TeamPositionsManager.getInstance()
 
-        // Set the dropdown layout style
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        teamText.text = teamposManager.getCurrentTeamName()
 
-        // Apply the adapter to the spinner
-        spinner_group_selection.adapter = adapter
 
 
         stationsuggest1 = binding.stationSuggest1
@@ -222,9 +218,14 @@ class HomeFragment : Fragment() {
         sendButton = binding.buttonSendPos
         sendButton.setOnClickListener { send_location_update() }
 
-        teamposManager = TeamPositionsManager.getInstance(thiscontext)
+
 
         position_check_box=binding.checkBox
+
+        if (teamposManager.getCurrentTeamName()!="MR X"){
+            position_check_box.isChecked=true
+            position_check_box.isEnabled=false
+        }
         return root
     }
 
@@ -330,20 +331,17 @@ class HomeFragment : Fragment() {
         }
         assert(transport !="-")
 
-        var group= spinner_group_selection.selectedItem.toString()
-        if (group== "MR X")
-            group="X"
-        // X is the internal name but MR X is displayed
+
         var station=stationtextview.text.toString()
 
-        if  (group=="X" && !position_check_box.isChecked){
+        if  (teamposManager.getCurrentTeamName()=="MR X" && !position_check_box.isChecked){
             station="hidden"
         }
         val new_loc: Position= Position(LocalTime.now(),station,transport)
 
-        teamposManager.add_position(group,new_loc)
+        teamposManager.add_position(new_loc)
 
-        if  (group=="X" && !position_check_box.isChecked){
+        if  (teamposManager.getCurrentTeamName()=="MR X" && !position_check_box.isChecked){
             Toast.makeText(requireContext(), "Umstieg ohne Position Gemeldet", Toast.LENGTH_SHORT).show()
         }else{
         Toast.makeText(requireContext(), "Position Gemeldet", Toast.LENGTH_SHORT).show()

@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.scotlandyardlive.Position
 import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.Team
 import com.example.scotlandyardlive.TeamPositionsManager
@@ -60,7 +61,7 @@ class DashboardFragment : Fragment() {
 
         thiscontext = container!!.context
 
-        teamlocations= TeamPositionsManager.getInstance(thiscontext)
+        teamlocations= TeamPositionsManager.getInstance()
 
         teamview_x= TeamView_row(binding.textView11,binding.textClock1,binding.imageView1,binding.textView1)
         teamview_rot=TeamView_row(binding.textView12,binding.textClock2,binding.imageView2,binding.textView2)
@@ -117,11 +118,11 @@ class DashboardFragment : Fragment() {
 
     }
 
-    fun set_team_veiw( t: Team,  row:TeamView_row){
+    fun set_team_veiw( pos_list: List<Position>,  row:TeamView_row){
 
-        if (t.Positions.isNotEmpty()){
+        if (pos_list.isNotEmpty()){
 
-        val last_station = t.Positions.last()
+        val last_station = pos_list.last()
 
         Log.d("set_team_veiw", last_station.toString())
 
@@ -167,16 +168,17 @@ class DashboardFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         set_team_veiws()
+        teamlocations.request_updates()
     }
 
     fun set_team_veiws(){
 
-        set_team_veiw(teamlocations.getteams()[0],teamview_x)
-        set_team_veiw(teamlocations.getteams()[1],teamview_rot)
-        set_team_veiw(teamlocations.getteams()[2],teamview_blau)
-        set_team_veiw(teamlocations.getteams()[3],teamview_grün)
-        set_team_veiw(teamlocations.getteams()[4],teamview_gelb)
-        set_team_veiw(teamlocations.getteams()[5],teamview_orange)
+        set_team_veiw(teamlocations.getteamPositions("X"),teamview_x)
+        set_team_veiw(teamlocations.getteamPositions("Rot"),teamview_rot)
+        set_team_veiw(teamlocations.getteamPositions("Blau"),teamview_blau)
+        set_team_veiw(teamlocations.getteamPositions("Grün"),teamview_grün)
+        set_team_veiw(teamlocations.getteamPositions("Gelb"),teamview_gelb)
+        set_team_veiw(teamlocations.getteamPositions("Orange"),teamview_orange)
 
     }
 

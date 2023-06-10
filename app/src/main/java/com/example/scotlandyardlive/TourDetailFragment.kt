@@ -45,7 +45,7 @@ class TourDetailFragment : Fragment() {
 
         tableLayout = binding.tableLayout
         captionText = binding.caption
-        teamManager = TeamPositionsManager.getInstance(requireContext())
+        teamManager = TeamPositionsManager.getInstance()
 
 
 
@@ -68,12 +68,10 @@ class TourDetailFragment : Fragment() {
         // clear
         tableLayout.removeAllViews()
 
-        val team = teamManager.getteam(Teamname)
-
-        Log.d("DetailView",team.toString())
+        val teamPositions = teamManager.getteamPositions(Teamname)
 
         val context = requireContext()
-        for (position in team.Positions) {
+        for (position in teamPositions) {
 
             val row = TableRow(context)
 

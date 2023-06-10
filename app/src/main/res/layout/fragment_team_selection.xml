@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TeamSelectionFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/team_selection"
+            android:textSize="@dimen/font_size"/>
+
+        <Button
+            android:id="@+id/buttonX"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="MR X" />
+
+        <Button
+            android:id="@+id/buttonBlau"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detektiv: Blau" />
+
+        <Button
+            android:id="@+id/buttonRot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detektiv: Rot" />
+
+        <Button
+            android:id="@+id/buttonGelb"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detektiv: Gelb" />
+
+        <Button
+            android:id="@+id/buttonGruen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detektiv: Grün" />
+
+        <Button
+            android:id="@+id/buttonOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Detektiv: Orange" />
+
+        <TextView
+            android:id="@+id/textViewMsg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+</FrameLayout>

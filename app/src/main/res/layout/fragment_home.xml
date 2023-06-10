@@ -56,10 +56,11 @@
                 android:text="@string/gruppe"
                 android:textSize="@dimen/font_size" />
 
-            <Spinner
-                android:id="@+id/spinner_group_selection"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/textView_group"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="TextView"
                 android:textSize="@dimen/font_size" />
 
         </LinearLayout>
