@@ -5,7 +5,12 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ScaleDrawable
 import android.location.Location
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -84,8 +89,12 @@ class MapFragment : Fragment() {
 
         var position_marker= Marker(map)
 
+        val icon = resources.getDrawable(R.drawable.b_pic)
+        val color = resources.getColor(R.color.red)
+        val loc_icon = get_position_marker(color,icon)
 
-        var loc_icon =resources.getDrawable(R.drawable.baseline_location_on_24)
+
+
         position_marker.icon = loc_icon
         position_marker.position=GeoPoint(pos_y, pos_x)
         position_marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
@@ -167,6 +176,30 @@ class MapFragment : Fragment() {
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         //Configuration.getInstance().save(this, prefs);
         map.onPause()  //needed for compass, my location overlays, v6.0.0 and up
+    }
+
+    fun get_position_marker(color: Int, vehicle_icon: Drawable):Drawable{
+        var loc_icon =resources.getDrawable(R.drawable.baseline_location_on_24)
+        val mutableDrawable = loc_icon?.mutate()
+        mutableDrawable?.setColorFilter(color, PorterDuff.Mode.SRC_IN)
+        //val scaled_vehicle = ScaleDrawable(vehicle_icon, 0, 12f, 12f).drawable
+
+        // Create an array of drawables for the layers
+        val layers = arrayOf(mutableDrawable, vehicle_icon)
+        //val layers = arrayOf(vehicle_icon,mutableDrawable)
+
+    // Create a LayerDrawable with the layers array
+        val layerDrawable = LayerDrawable(layers)
+
+        // Set the position of the foreground layer
+        val foregroundIndex = 1  // Index of the foreground layer in the layers array
+        val leftOffset = 40   // Left offset in pixels
+        val topOffset = 20     // Top offset in pixels
+        val rightOffset = 38    // Top offset in pixels
+        val bottomOffset = 52     // Top offset in pixels
+        layerDrawable.setLayerInset(foregroundIndex, leftOffset, topOffset, rightOffset, bottomOffset)
+
+        return layerDrawable
     }
 
 
