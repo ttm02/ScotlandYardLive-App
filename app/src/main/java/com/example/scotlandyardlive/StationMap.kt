@@ -2,15 +2,14 @@ package com.example.scotlandyardlive
 
 import android.app.AlertDialog
 import android.content.Context
-import android.util.Log
 import dmax.dialog.SpotsDialog
-import kotlin.math.cos
+import org.osmdroid.util.GeoPoint
 import kotlin.math.roundToInt
-import kotlin.math.sqrt
 
 
 class StationMap private constructor(
-    private val map: Map<Pair<Double, Double>, String>,
+    private val coordinates_to_stations: Map<Pair<Double, Double>, String>,
+    private val stations_to_coordinates: Map<String,Pair<Double, Double>>,
     private val list: Array<String>
 ) {
 
@@ -31,8 +30,9 @@ class StationMap private constructor(
 
                         val reader = StationReader(context = context)
                         val data = reader.readStationsFromAssets()
+                        val valueToCoordinates: Map<String, Pair<Double, Double>> = data.entries.associate { (key, value) -> value to key }
 
-                        instance = StationMap(data,data.mapNotNull { (_, string) -> string }.toTypedArray())
+                        instance = StationMap(data,valueToCoordinates,data.mapNotNull { (_, string) -> string }.toTypedArray())
 
                         dialog.dismiss()
                     }
@@ -50,14 +50,14 @@ class StationMap private constructor(
     fun get_nearest_stations(pos: Pair<Double, Double>, n: Int): List<Pair<String,Int>> {
 
         assert(n > 0)
-        assert(n < map.size)
+        assert(n < coordinates_to_stations.size)
 
 
         var current_best: MutableList<Triple<Pair<Double, Double>, Double, String>> =
             mutableListOf()
 
 
-        map.forEach { (key, value) ->
+        coordinates_to_stations.forEach { (key, value) ->
             // Perform operation for each key-value pair
             val dist = distance(pos, key)
 
@@ -118,6 +118,11 @@ class StationMap private constructor(
 
     fun get_station_list():Array<String>{
         return list
+    }
+
+    fun get_station_position(station_name:String):Pair<Double,Double>?{
+        return stations_to_coordinates.get(station_name)
+        // or null if not found
     }
 
 }
