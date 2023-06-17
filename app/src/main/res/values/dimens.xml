@@ -4,5 +4,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="font_size">20sp</dimen>
     <dimen name="text_margin">16dp</dimen>
+    <dimen name="AutoFillText_width">250dp</dimen>
 
 </resources>

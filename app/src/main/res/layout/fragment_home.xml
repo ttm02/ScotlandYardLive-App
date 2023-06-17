@@ -79,7 +79,7 @@
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleteTextView"
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/AutoFillText_width"
                 android:layout_height="wrap_content"
                 android:text="AutoCompleteTextView"
                 android:textSize="@dimen/font_size" />
