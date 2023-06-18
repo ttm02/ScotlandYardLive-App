@@ -10,7 +10,6 @@
     <string name="emptysuggestion">--locate nearest Stations--</string>
     <string name="historie_caption">Historie: %s</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="team_selection">Wähle ein Team:</string>
     <string name="team_selection_caption">Teamwahl</string>
     <string name="detailview_caption">Historie</string>

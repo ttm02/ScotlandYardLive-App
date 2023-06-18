@@ -14,7 +14,6 @@
         tools:layout_editor_absoluteY="1dp">
 
         <TextView
-            android:id="@+id/text_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -37,7 +36,6 @@
                 android:textSize="@dimen/font_size" />
 
             <TextClock
-                android:id="@+id/textClock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/font_size" />
@@ -50,14 +48,13 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/gruppe"
                 android:textSize="@dimen/font_size" />
 
             <TextView
-                android:id="@+id/textView_group"
+                android:id="@+id/textViewGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
@@ -154,22 +151,27 @@
                     android:id="@+id/radioButtonR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Regio" />
+                    android:text=""
+                    android:drawableStart="@drawable/r_pic"
+                    android:textColor="@android:color/transparent"
+                    />
 
                 <RadioButton
                     android:id="@+id/radioButtonU"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="U-Bahn" />
+                    android:text=""
+                    android:drawableStart="@drawable/u_pic"
+                    android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="S-Bahn" />
-            </TableRow>
+                    android:text=""
+                    android:drawableStart="@drawable/s_pic"
+                    android:textColor="@android:color/transparent"/>
 
-            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -177,26 +179,25 @@
                     android:id="@+id/radioButtonT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tram" />
+                    android:text=""
+                    android:drawableStart="@drawable/t_pic"
+                    android:textColor="@android:color/transparent"/>
 
                 <RadioButton
                     android:id="@+id/radioButtonM"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Metro-Bus" />
+                    android:text=""
+                    android:drawableStart="@drawable/m_pic"
+                    android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Bus" />
-                <!--
-                                    <RadioButton
-                                        android:id="@+id/radioButtonM"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Metro-Bus" />
-                 -->
+                    android:text=""
+                    android:drawableStart="@drawable/b_pic"
+                    android:textColor="@android:color/transparent" />
             </TableRow>
 
         </TableLayout>

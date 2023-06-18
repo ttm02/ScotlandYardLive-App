@@ -19,3 +19,14 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+
+# Please add these rules to your existing keep rules in order to suppress warnings.
+# This is generated automatically by the Android Gradle plugin.
+-dontwarn com.google.appengine.api.urlfetch.FetchOptions$Builder
+-dontwarn com.google.appengine.api.urlfetch.FetchOptions
+-dontwarn com.google.appengine.api.urlfetch.HTTPHeader
+-dontwarn com.google.appengine.api.urlfetch.HTTPMethod
+-dontwarn com.google.appengine.api.urlfetch.HTTPRequest
+-dontwarn com.google.appengine.api.urlfetch.HTTPResponse
+-dontwarn com.google.appengine.api.urlfetch.URLFetchService
+-dontwarn com.google.appengine.api.urlfetch.URLFetchServiceFactory
