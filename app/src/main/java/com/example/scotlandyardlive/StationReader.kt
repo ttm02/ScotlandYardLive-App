@@ -22,12 +22,20 @@ class StationReader(private val context: Context) {
         // read header
         val header = data[0]
         var name = 0
+        var name_full =0
+        var landkreis=0
         var x = 0
         var y = 0
         for (i in header.indices) {
             Log.i("StationReader", "${header[i]}")
             if (header[i] == "HST_NAME") {
                 name = i
+            }
+            if (header[i] == "NAME_FAHRPLAN") {
+                name_full = i
+            }
+            if (header[i] == "LANDKREIS") {
+                landkreis = i
             }
             if (header[i] == "X_WGS84") {
                 x = i
@@ -47,7 +55,12 @@ class StationReader(private val context: Context) {
                     val x_coord = entry[x].replace(",", ".").toDouble()
                     val y_coord = entry[y].replace(",", ".").toDouble()
 
-                    stationmap[Pair(x_coord, y_coord)] = entry[name]
+                    var name_to_use = entry[name]
+
+                    if (entry[landkreis] !="Stadt Frankfurt a.M")
+                        name_to_use= entry[name_full]
+
+                    stationmap[Pair(x_coord, y_coord)] = name_to_use
 
                 } catch (e: NumberFormatException) {
                     Log.e("StationReader", "Error Reading Coordinate value: ${e.message}")
