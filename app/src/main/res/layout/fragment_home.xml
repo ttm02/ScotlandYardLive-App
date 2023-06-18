@@ -151,52 +151,49 @@
                     android:id="@+id/radioButtonR"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/r_pic"
-                    android:textColor="@android:color/transparent"
-                    />
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonU"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/u_pic"
+                    android:text=""
                     android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonS"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/s_pic"
-                    android:textColor="@android:color/transparent"/>
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
 
                 <RadioButton
                     android:id="@+id/radioButtonT"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/t_pic"
-                    android:textColor="@android:color/transparent"/>
+                    android:text=""
+                    android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonM"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/m_pic"
+                    android:text=""
                     android:textColor="@android:color/transparent" />
 
                 <RadioButton
                     android:id="@+id/radioButtonB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
                     android:drawableStart="@drawable/b_pic"
+                    android:text=""
                     android:textColor="@android:color/transparent" />
             </TableRow>
 
