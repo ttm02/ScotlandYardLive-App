@@ -180,6 +180,12 @@
                     android:text="Tram" />
 
                 <RadioButton
+                    android:id="@+id/radioButtonM"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Metro-Bus" />
+
+                <RadioButton
                     android:id="@+id/radioButtonB"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

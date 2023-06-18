@@ -148,6 +148,9 @@ class DashboardFragment : Fragment() {
                 "T" -> {
                     row.image.setImageResource(R.drawable.t_pic)
                 }
+                "M" -> {
+                    row.image.setImageResource(R.drawable.m_pic)
+                }
 
                 "B" -> {
                     row.image.setImageResource(R.drawable.b_pic)

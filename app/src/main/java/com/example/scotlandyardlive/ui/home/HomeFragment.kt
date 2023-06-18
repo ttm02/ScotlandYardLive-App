@@ -51,7 +51,7 @@ class HomeFragment : Fragment() {
     private lateinit var buttonU: RadioButton
     private lateinit var buttonT: RadioButton
     private lateinit var buttonB: RadioButton
-    //private lateinit var buttonM: RadioButton
+    private lateinit var buttonM: RadioButton
 
     // FusedLocationProviderClient - Main class for receiving location updates.
     private lateinit var fusedLocationClient: FusedLocationProviderClient
@@ -125,7 +125,7 @@ class HomeFragment : Fragment() {
         buttonU = binding.radioButtonU
         buttonT = binding.radioButtonT
         buttonB = binding.radioButtonB
-        //buttonM = binding.radioButtonM
+        buttonM = binding.radioButtonM
 
         buttonS.setOnClickListener {
             buttonS.isChecked = true
@@ -133,7 +133,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = false
-            //buttonM.isChecked = false
+            buttonM.isChecked = false
         }
 
         buttonR.setOnClickListener {
@@ -142,7 +142,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = false
-            //buttonM.isChecked = false
+            buttonM.isChecked = false
         }
 
         buttonU.setOnClickListener {
@@ -151,7 +151,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = true
             buttonT.isChecked = false
             buttonB.isChecked = false
-            //buttonM.isChecked = false
+            buttonM.isChecked = false
         }
 
         buttonT.setOnClickListener {
@@ -160,7 +160,7 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = true
             buttonB.isChecked = false
-            //buttonM.isChecked = false
+            buttonM.isChecked = false
         }
 
         buttonB.setOnClickListener {
@@ -169,10 +169,10 @@ class HomeFragment : Fragment() {
             buttonU.isChecked = false
             buttonT.isChecked = false
             buttonB.isChecked = true
-            //buttonM.isChecked = false
+            buttonM.isChecked = false
         }
 
-        /*
+
         buttonM.setOnClickListener {
             buttonS.isChecked = false
             buttonR.isChecked = false
@@ -181,7 +181,7 @@ class HomeFragment : Fragment() {
             buttonB.isChecked = false
             buttonM.isChecked = true
         }
-        */
+
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(thiscontext)
 
@@ -338,6 +338,9 @@ class HomeFragment : Fragment() {
         } else if (buttonT.isChecked) {
             assert(transport == "-")
             transport = "T"
+        } else if (buttonM.isChecked) {
+            assert(transport == "-")
+            transport = "M"
         }
         assert(transport != "-")
 

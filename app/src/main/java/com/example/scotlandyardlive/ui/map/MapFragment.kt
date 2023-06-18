@@ -185,6 +185,9 @@ class MapFragment : Fragment() {
                     vecicle_icon = ContextCompat.getDrawable(requireContext(), R.drawable.t_pic)!!
                 }
 
+                "M" -> {
+                    vecicle_icon = ContextCompat.getDrawable(requireContext(), R.drawable.m_pic)!!
+                }
                 "B" -> {
                     vecicle_icon = ContextCompat.getDrawable(requireContext(), R.drawable.b_pic)!!
                 }

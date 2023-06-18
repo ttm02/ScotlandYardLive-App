@@ -129,6 +129,10 @@ class TourDetailFragment : Fragment() {
                     image.setImageResource(R.drawable.t_pic)
                 }
 
+                "M" -> {
+                    image.setImageResource(R.drawable.m_pic)
+                }
+
                 "B" -> {
                     image.setImageResource(R.drawable.b_pic)
                 }
