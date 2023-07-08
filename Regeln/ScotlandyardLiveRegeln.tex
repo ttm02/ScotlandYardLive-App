@@ -1,0 +1,134 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+
+\usepackage{lmodern}
+
+\usepackage[footnote]{acronym}
+\usepackage[page,toc]{appendix}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage[htt]{hyphenat}
+\usepackage{listings}
+\usepackage{lscape}
+\usepackage{microtype}
+\usepackage{nicefrac}
+\usepackage{subfig}
+\usepackage{textcomp}
+\usepackage[subfigure,titles]{tocloft}
+\usepackage{units}
+
+\usepackage{ragged2e}%bessere Formatierung der Bibliographie
+
+
+\usepackage{varioref}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,noabbrev]{cleveref}
+
+
+\title{Scotland Yard Live Regeln}
+
+\author{Tim Jammer}
+\date{15.07.2023}
+\begin{document}
+
+\maketitle
+
+
+\section{Spielgebiet}
+Es Spielen folgende RMV Tarifgebeite Mit:\\
+Alle Tarifgebeite die mit 50 Beginnen: Stadt Frankfurt a. M. mit Flughafen\\
+sowie das gebiet 2601 (Bad Vilbel).
+
+\section{Erlaubte Verkehrsmittel}
+Es spielen Folgene Verkehrsmittel Mit:
+\begin{itemize}
+\item[R] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/r_pic.png}} (RB oder RE)
+\item[S] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/s_pic.png}} (S-Bahn)
+\item[U] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/u_pic.png}} (U-Bahn)
+\item[T] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/t_pic.png}} (Tram /Straßenbahn)
+\item[B] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/b_pic.png}} (Bus)
+\item[M] {\includegraphics[width=0.5cm]{../app/src/main/res/drawable/m_pic.png}} (Metrobus - Alle Lininennummern die mit einem M beginnen)
+\end{itemize}
+Ein wesentlicher Unterschied zwischen B und M ist, dass M linien auf dem übersichts-Lininenetsplan eingezeichnet sind und B lininien nicht.\\
+Express-Busse (Alle Linien., die mit einem X Beginnen) zählen sowohl als B Bus als auch als M Metrobus.\\
+Ein S-Bahn Ersatz bus zählt für die Spielregeln als S-Bahn und nciht als bus (entsprechend für die anderen Bahnen)
+\\
+Nicht erlaubt sind on-Demand Verkehre (z.B. Rufbusse) sowie nicht im Deutschlandticket enthaltene Verkehrsmnittel wie z.B. ICE/IC oder EC Züge.
+Es ist erlaubt in Verkehrsmittel einzusteigen, die auch außerhalb des Spielgebietes zu verkehren, man muss dabei aber natürlich rechtzeitig vor verlassen des Spielgebiets aussteigen.
+
+\section{Melderegeln}
+Spätestens beim Einsteigen muss die Verkehrsmittelart bekanntgegeben werden, mit der man weiterfahren will, falls diese unterschiedlich zur aktuell gemeldeten ist.
+Nach der Meldung muss man jedoch nicht direkt in das Nächste Verkehrsmittel dieser Art einsteigen.
+Man muss sich jedoch auf dem Direkten weg dahin begeben, wo ein Verkehrsmittel der besagten Art tatsächlich abfährt
+(also nicht Bus Anmelden und am U-bahn Gleis Warten).
+Man kann an der gleichen Haltestelle auch eine andere Verkehrsmittelart melden, wenn das dann doch eine besser Option ist.
+Eine Verkehrsmittelart Melden, obwohl man von anfang an weiß, nicht damit Fahren zu wollen ist nicht erlaubt (Fair Play).
+Das Warten an haltestellen ist allerdings grundsätzlich erlaubt. (in diesem Fall meldet man einfach erstmal das, was einem am Wahrscheinlichsten erscheint und entscheidet sich später im zweifel um).
+Man muss dabei grundsätzlich immer dort an der Haltestelle Warten, wo ein Verkehrsmittel der gemeldeten art abfährt.
+\\
+\\
+Meldungen können nur außerhlab von Fahzeugen gemacht werden.\\
+\\
+Detektive müsen sich bei jeder Meldung mit Position melden.\\
+\\
+Die App aktualisiert die standorte der anderen Teams nur dann, wenn man seine eigene Position einträgt (bzw als Mr X ohne position meldet).
+Die Uhrzeit wird minutengenau bestimmt, wenn man sich um 10:01:05 meldet bekommt man das update der Gruppe die sich um 10:01:55 meldet automatisch mit, die Gruppe, die sich um 10:00:55 meldete weiß alllerdings nciht euren standort
+Nur ein Teammitglied sollte die Statzionsmeldungen abgeben, alle anderen können aber die app lesend benutzen.
+Die Zeitzone des eigenen Telefons zu verstellen ist gemäß der prinzipien des Fair Play natürlich nicht erlaubt.
+
+\subsection{Mr X}
+Alle 45 Min+-5 min muss Mr X seine Position melden.
+Die genauen Zeiten werden bei Spielbeginn Festgelegt.
+Dazu muss er aus einem Fahrzeug Aussteigen und kann nicht in das Gleiche Fahrzueg einsteigen, auch wenn es als andere Linie oder nach Pause in die andere Richtung weiterfährt. (außer es kommt in den nächsten 20 min laut Fahrplan kein anderes Fahrzeug).
+Mr X darf nicht in ein Fahrzeug einsteigen, wenn er es nicht vor ende des Meldeintervalls verlassen kann.
+bie einer verspätung muss er im Zweifel an der Aktuellen Haltestelle aussteigen.
+
+\section{Fangen von Mr X}
+Die Detektive gewinnen, wenn sie Mr X unmittelbar antreffen (z.B. am gleichen Bahnsteig, im gleichen zug, ...).
+das reine sehen von Mr X z.B. in einem abfahrenden Bus reicht nicht aus.
+Erst wenn die Detektive Mr X für mehr als eine Minute sehen können (z.B. am Bahnsteig gegenüber) gilt er als gefangen.
+Mr X darf sich nciht an haltestellen verstecken (z.B. hinder dem Wartehäuschen einer bushaltestelle).
+
+\section{Absprachen der Detektive}
+Detektive dürfen sich nur mit Live Audio absprechen z.B. Telefonantrufe oder Whats-App anrufe oder Face 2 Face vor Ort sein.
+Sprach und oder Textnachrichten zum späteren abhören/Lesen sind nicht erlaubt.
+Alle an der Konversation beteiligten teams müssen sich während der Konversation außerhalb von Fahrzeugen an Haltestellen aufhalten.
+Falls Gruppen im gleichen fahrzeug sitzen können sie sich auch während der Fahrt face 2 face absprechen.
+Die Idee ist, einen Whats-App Gruppenanruf zu starten, dem man nur beitreten darf, wenn man grade an einer Haltestelle ist.
+
+\section{Spezielle Haltestellen}
+Grundsätzlich ist ein Umstig nur an Haltestellen mit dem selben Namen Erlaubt. 
+Die Haltestellen Südbahnhof und Südbahnhof/Schweizer straße sind also getrennte haltestellen zwischen denen \textbf{kein Umstig} besteht (man kann aber z.B. mit der tram 18 vom südbahbhof zum Südbahnhof Schweizer Str. fahren).
+Im Folgenden werden die Außnahmen von dieser Regel erklärt.
+
+\subsection{Frankfurt Hauptbahhof}
+Die Haltestellen Frankfurt Hauptbahnhof und Frankfurt Hauptbahbhof(Tief) sind \textbf{für Mr X 2 verschiedene Haltestellen}.
+Es darf also nicht am Haquptbahnhof zwischen der S-Bahn und der U-Bahn umgestiegen werden (außer  die S7, die nicht Hbf Tief sondern in der Halle oben Verkehrt).
+\textbf{Detektive sind von Dieser Einschränkung nciht betroffen}, für sie gilt Hbf. und Hbf. Tief als eine Haltestelle.
+Sie müssen bei einstieg in die S-Bahn aber die Korrekte Haltestelle angeben.
+Die Haltestellen Hbf. Münchener Str., Hbf. Fernbusterminal und Hbf. Südeseite zählen für alle Teams als eigenständige Haltestellen.
+Mr X muss am Hbf immer vor der Zentralen abfahrtstafel warten (bis 5 min vor der abfahrt seines Zuges).
+
+\subsection{Flughafen}
+Die Haltestellen Frankfurt Flughafen Regionalbahnhof und Frankfurt Flughafen Terminal 1 gelten im Sinne der Spielregeln als eine Haltestelle, es besteht also ein umstieg zwishcen Bus und Bahn.
+
+\subsection{Konstabler Wache}
+\textit{Mr X} Muss \textbf{immer} an der Konstabler wache Aussteigen und darf nicht mit dem gleichen Fahrzeug weiterfahren.
+
+\subsection{Ostbahnhof}
+Die Haltestellen Ostbahnhof (U-Bahn, Regionalbahn) und Ostbahnhof/Honsellstraße (Tram) gelten als eine gebeinsame haltestelle, zwishcen denen umgestiegen werden darf.
+Die Haltestellen Ostbahbhof sonnemanstraße und Ostbahbhof Danziger Platz sind eigenständige Haltestellen.
+
+\subsection{Eschersheim/ Weißer Stein}
+Auf dem Direkten weg von Eschersheim nach Weißer Stein (oder umgekehrt) zu laufen ist erlaubt. 
+auf dem Weg zwischen den beiden Haltestellen zu warten ist nicht erlaubt.
+Wenn man den Fußweg in eine Richtung beschreitet, muss man sich bei beginn des Weges bereits auf das andere Verkehrsmittel (an der anderen Haltestelle) ummelden und darf \textbf{nicht} bei ankunft an der anderen Haltestelle wieder umkehren, muss dort also dann auch tatsächlich in ein Verkehrsmittel einsteigen.
+
+
+\end{document}
