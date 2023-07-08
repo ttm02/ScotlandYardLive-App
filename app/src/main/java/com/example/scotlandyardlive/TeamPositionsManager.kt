@@ -196,7 +196,21 @@ interface UploadCallback {
 class TeamPositionsManager private constructor(
     private val currentTeam: String,
     private val teamlist: Array<Team>,
-    private val download_api_key: String,
+    private val download_api_key: String = """
+        {
+          "type": "service_account",
+          "project_id": "scotlandyardlive-388807",
+          "private_key_id": "bcf9e9b03034d4d5acf1369eaac6fdb830f58169",
+          "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDHvz9AiNin5SXr\nOGVunJX+2NVZpDwY+A3lLyE1eeSXrGZ+uvjiS3G2/14AjDGNxvTFEAnXVZejsOTe\nMtuxF73VNcN8FhqKm/bGyzmflKlSOcysZjWkPpaEV5Q2OcLoOQvyK5cXPjNMHlkQ\nqmIn/6VJ1YvqLzPSf7BauQyqF7gsnYqSpN/FiDPoQg8GmdFHsMkDm8iW/dkQ9YdA\n+CuZTKUIhFg0YaF3FEUU/QXKdYXuf0kw04hC7UvtHIrtv3SaRFWJGSdyQ4SYxGc9\nGVf1Wtq4+3YmjONpVgcj/M4+18V9l9yXFCaMKkVhJzzQuERt7EYUxBRTzub4lKXS\nuTt/jnl1AgMBAAECggEACUtfXJfhiPJzML5Hjf2QRzL8vnaTa1ADiYIHaA8bcWlO\nvZ/im9kJ2guI6rqbRa8XzaGg65mqfC3rgGFacqOZrDWbuobmxkNamMZ1EHVg6ZgR\n64W4AkP9SfwvQ9StOpQI98RKfATjayvQViOvfI/7N3PN1mBK54UUhiwtKC8BXWYE\nMBUT2PYENaAa3GmUQn62e6ZXBZj/oLEnSLCGMTF7lzAeTjzt/wxOkxnSyHRdilfv\nu0VcD6hAyOgHJSCJWtV5TWz/AfaNZFCyQLGnNtU5TFIkdRm/t4nFnyDyzJGbYctL\nLBq0dMJ6f3mHTkvx1f57kVpQHDSTb+XsYd+Zw/Df8wKBgQDrxtm7mmPbQM4uXIxi\npm+HmmZV+mgcLN0Or0cDNes2UQLpewNnmOeQjEqvwKhBVea7z1MQtup6KcqPGSz6\namXsvaTS2KEBnEFhiC2ImdfZwQilOM/7nasiutWYsc+YLfCRPJQ46xsHYTy7jD1N\nEFMX7VIjrBPTVylRaAb/odo01wKBgQDY4UMRMWhUfJzYb5Zrz7j3rIzSx5COXiH1\nigbg+NXtwhDGS0rQeQiY4Xr7ZJRPPW4cM4hUigMIvFOITfzs1EDz/UCqe4jLMWRK\noyyKsGN4YY9wqWMDI3pw0otSzi8B1ZP9NNE6G+GYP3ZsS42Mtu841E3t7ONxnNsV\nTgeDeGiukwKBgQCxeU3dpBo0KLTKOwnFHAjpprQPVdzWEIMZEaC/bu+tRA+QFfN7\nIKJ1sNRrNPaxr2ptxmJ9O2KGMDzzt/yeRkaQjDOsLjoLj0W7l5jGsR7EH0RVsc0E\nVitCiiZLuNRNdY8Wk+Xybi47QNtJRQfDoV0arp3ckiOeOoa0azyRYZBxowKBgQCO\n6F/5BEVq5nGzbFQB1m5bRSfF/BoUtZJK6Rh/RXgxop7LCvHRTO+NTYZsAGp5jFDx\n5EMA8a/uIaopNrpik7n5C/eAXsZUnccoJz1CZdgliqOp6POFLeuQTCvh9FqlKsbJ\nIfR8BcMxPyAZW+95uVEIcVyoWl/EjUcPUstApibUYQKBgQCVm6IKlW+M8BUPOpVu\nNvctt6ucaN5eSOfTWXEI5bznrNRQ/zktS/DcZgGX/DTPMSQeV5OjhPRq7VHKTUvV\n08Fpb9aUdnJB/oMMlsrXkGyidIuMnM49hRdbju2E7IvgTGQnIqQwkz7LDYypZnOq\nNKSuprzgI+NnawfJM4SqeTFFbg==\n-----END PRIVATE KEY-----\n",
+          "client_email": "scotlandyardlive-client@scotlandyardlive-388807.iam.gserviceaccount.com",
+          "client_id": "114648704006533040660",
+          "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+          "token_uri": "https://oauth2.googleapis.com/token",
+          "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+          "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/scotlandyardlive-client%40scotlandyardlive-388807.iam.gserviceaccount.com",
+          "universe_domain": "googleapis.com"
+        }
+    """.trimIndent(),
     // wen requesting an update, we use this counter to count the number of updates received
     private var team_update_counter: AtomicInteger = AtomicInteger(0),
     private var team_update_in_progress: AtomicBoolean = AtomicBoolean(false),
@@ -233,11 +247,11 @@ class TeamPositionsManager private constructor(
                 object : TypeToken<Map<String, Team>>() {}.type
             )
 
-            val api_key_json = loadJSONFromAsset(context, "api_key.json")
+            //val api_key_json = loadJSONFromAsset(context, "api_key.json")
             instance = TeamPositionsManager(
                 selectedTeam,
                 teams.values.toTypedArray(),
-                api_key_json!!
+                //api_key_json!!
             )
         }
 
@@ -298,7 +312,7 @@ class TeamPositionsManager private constructor(
     }
 
     fun getCurrentTeamName(): String {
-        return if (currentTeam == "x")
+        return if (currentTeam == "X")
             "MR X"
         else
             currentTeam
