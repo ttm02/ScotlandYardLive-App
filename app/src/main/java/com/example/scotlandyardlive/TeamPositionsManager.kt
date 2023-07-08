@@ -196,7 +196,7 @@ interface UploadCallback {
 class TeamPositionsManager private constructor(
     private val currentTeam: String,
     private val teamlist: Array<Team>,
-    private val download_api_key: String,
+    private val download_api_key: String = "".trimIndent(),
     // wen requesting an update, we use this counter to count the number of updates received
     private var team_update_counter: AtomicInteger = AtomicInteger(0),
     private var team_update_in_progress: AtomicBoolean = AtomicBoolean(false),
@@ -233,11 +233,11 @@ class TeamPositionsManager private constructor(
                 object : TypeToken<Map<String, Team>>() {}.type
             )
 
-            val api_key_json = loadJSONFromAsset(context, "api_key.json")
+            //val api_key_json = loadJSONFromAsset(context, "api_key.json")
             instance = TeamPositionsManager(
                 selectedTeam,
                 teams.values.toTypedArray(),
-                api_key_json!!
+                //api_key_json!!
             )
         }
 
@@ -298,7 +298,7 @@ class TeamPositionsManager private constructor(
     }
 
     fun getCurrentTeamName(): String {
-        return if (currentTeam == "x")
+        return if (currentTeam == "X")
             "MR X"
         else
             currentTeam
