@@ -163,7 +163,7 @@ class TourDetailFragment : Fragment() {
             "Grün" -> color = resources.getColor(R.color.green)
             "Blau" -> color = resources.getColor(R.color.blue)
             "Gelb" -> color = resources.getColor(R.color.yellow)
-            "Orange" -> resources.getColor(R.color.orange)
+            "Orange" -> color = resources.getColor(R.color.orange)
         }
 
 //            activity?.actionBar?.setBackgroundDrawable(ColorDrawable(color))
