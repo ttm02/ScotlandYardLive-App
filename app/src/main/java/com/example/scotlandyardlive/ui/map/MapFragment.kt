@@ -3,10 +3,13 @@ package com.example.scotlandyardlive.ui.map
 //import androidx.lifecycle.ViewModelProvider
 
 import android.content.Context
+import android.content.res.Configuration
 import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
+import android.net.ipsec.ike.TunnelModeChildSessionParams.ConfigRequestIpv6DnsServer
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -17,11 +20,14 @@ import com.example.scotlandyardlive.R
 import com.example.scotlandyardlive.StationMap
 import com.example.scotlandyardlive.TeamPositionsManager
 import com.example.scotlandyardlive.databinding.FragmentMapBinding
+import org.osmdroid.api.IGeoPoint
 import org.osmdroid.api.IMapController
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
+import org.osmdroid.config.Configuration.*
+import org.osmdroid.library.BuildConfig
 import java.time.format.DateTimeFormatter
 
 
@@ -36,10 +42,6 @@ class MapFragment : Fragment() {
     private lateinit var thiscontext: Context
     private lateinit var map: MapView
 
-    // Start Location: Frankfurt Hauptbahnhof
-    private var pos_x: Double = 8.66243955604308 // lon
-    private var pos_y: Double = 50.10688202021955 // lat
-
     private lateinit var mapController: IMapController
 
     private lateinit var teamManager: TeamPositionsManager
@@ -51,51 +53,52 @@ class MapFragment : Fragment() {
     private lateinit var marker_team_blau: Marker
     private lateinit var marker_team_orange: Marker
 
+    private var view: View? = null
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        //  val mapViewModel =
-        //      ViewModelProvider(this).get(MapViewModel::class.java)
 
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+            //  val mapViewModel =
+            //      ViewModelProvider(this).get(MapViewModel::class.java)
 
-        thiscontext = container!!.context
+            _binding = FragmentMapBinding.inflate(inflater, container, false)
+            val root: View = binding.root
 
-        teamManager = TeamPositionsManager.getInstance()
-        stationmap = StationMap.getInstance(requireContext())
+            thiscontext = container!!.context
 
-        map = binding.map
+            teamManager = TeamPositionsManager.getInstance()
+            stationmap = StationMap.getInstance(requireContext())
 
-        map.setTileSource(TileSourceFactory.MAPNIK)
+            map = binding.map
 
-        map.isTilesScaledToDpi = true
-        map.setMultiTouchControls(true)
+            val map_manager = MapManager.getInstance(requireContext())
+
+            map.setTileSource(map_manager.get_MapTileProvider())
+
+            map.isTilesScaledToDpi = true
+            map.setMultiTouchControls(true)
 
 
-        marker_team_X = Marker(map)
-        marker_team_rot = Marker(map)
-        marker_team_gruen = Marker(map)
-        marker_team_gelb = Marker(map)
-        marker_team_blau = Marker(map)
-        marker_team_orange = Marker(map)
+            marker_team_X = Marker(map)
+            marker_team_rot = Marker(map)
+            marker_team_gruen = Marker(map)
+            marker_team_gelb = Marker(map)
+            marker_team_blau = Marker(map)
+            marker_team_orange = Marker(map)
 
-        // Add the markers to the map overlays
-        map.overlays.add(marker_team_X)
-        map.overlays.add(marker_team_rot)
-        map.overlays.add(marker_team_gruen)
-        map.overlays.add(marker_team_gelb)
-        map.overlays.add(marker_team_blau)
-        map.overlays.add(marker_team_orange)
+            // Add the markers to the map overlays
+            map.overlays.add(marker_team_X)
+            map.overlays.add(marker_team_rot)
+            map.overlays.add(marker_team_gruen)
+            map.overlays.add(marker_team_gelb)
+            map.overlays.add(marker_team_blau)
+            map.overlays.add(marker_team_orange)
 
-        mapController = map.controller
-        mapController.setZoom(14.0)
-        // Start Location: Frankfurt Hauptbahnhof
-        val startPoint = GeoPoint(pos_y, pos_x)
-        mapController.setCenter(startPoint)
+            mapController = map.controller
 
         return root
     }
@@ -109,6 +112,9 @@ class MapFragment : Fragment() {
         //Configuration.getInstance().load(this, PreferenceManager.getDefaultSharedPreferences(this));
         map.onResume() //needed for compass, my location overlays, v6.0.0 and up
         //map.overlays.clear()
+        val map_manager = MapManager.getInstance(requireContext())
+        mapController.setZoom(map_manager.get_zoom_level())
+        mapController.setCenter(map_manager.get_map_center())
 
         update_position_marker("X")
         update_position_marker("Rot")
@@ -217,11 +223,15 @@ class MapFragment : Fragment() {
 
     override fun onPause() {
         super.onPause()
+
+        val map_manager = MapManager.getInstance(requireContext())
+        map_manager.set_map_center(map.getMapCenter())
         //this will refresh the osmdroid configuration on resuming.
         //if you make changes to the configuration, use
         //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         //Configuration.getInstance().save(this, prefs);
         map.onPause()  //needed for compass, my location overlays, v6.0.0 and up
+
 
     }
 
@@ -256,6 +266,7 @@ class MapFragment : Fragment() {
 
 
     override fun onDestroyView() {
+        // this may leak ressources
         super.onDestroyView()
         _binding = null
     }
