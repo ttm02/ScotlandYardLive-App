@@ -24,6 +24,7 @@ import java.lang.reflect.Type
 
 import com.google.cloud.storage.Storage
 import com.google.cloud.storage.StorageOptions
+import com.google.gson.InstanceCreator
 import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
@@ -47,9 +48,25 @@ data class Team(
         // TODO should we save the gson reader instead of rebuilding it?
         val gson = GsonBuilder()
             .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
+            .registerTypeAdapter(Team::class.java, TeamInstanceCreator())
             .create()
 
         return "{\"Team\":" + gson.toJson(this) + "}"
+    }
+
+    // creates an empty instance for usage with gson
+    companion object {
+        fun createInstance(): Team {
+            // Create a new instance of Team using custom logic
+            // For example, you can provide default values or perform additional initialization
+            return Team("", mutableListOf())
+        }
+    }
+}
+
+class TeamInstanceCreator : InstanceCreator<Team> {
+    override fun createInstance(type: Type): Team {
+        return Team.createInstance()
     }
 }
 
@@ -120,7 +137,7 @@ fun enqueue_downloadJsonFromCloudStorage(
     val inputStream: InputStream = ByteArrayInputStream(apiKey.toByteArray())
     val credentials = GoogleCredentials.fromStream(inputStream)
     val storage: Storage = StorageOptions.newBuilder()
-        .setProjectId("scotlandyardliveapp")
+        .setProjectId("scotlandyardlive-388807")
         .setCredentials(credentials)
         .build().service
 
@@ -225,6 +242,7 @@ class TeamPositionsManager private constructor(
 
             val gson = GsonBuilder()
                 .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
+                .registerTypeAdapter(Team::class.java, TeamInstanceCreator())
                 .create()
 
             val jsonString = loadJSONFromAsset(context, "empty_positions.json")
@@ -328,6 +346,7 @@ class TeamPositionsManager private constructor(
         // TODO should we save the gson reader instead of rebuilding it?
         val gson = GsonBuilder()
             .registerTypeAdapter(LocalTime::class.java, LocalTimeSerializer())
+            .registerTypeAdapter(Team::class.java, TeamInstanceCreator())
             .create()
 
         val teams: Map<String, Team> = gson.fromJson(
