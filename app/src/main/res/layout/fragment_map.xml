@@ -6,7 +6,28 @@
     android:layout_height="match_parent"
     tools:context=".ui.map.MapFragment">
 
-        <org.osmdroid.views.MapView android:id="@+id/map"
+        <RelativeLayout
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent" />
+            android:layout_height="fill_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+
+        <org.osmdroid.views.MapView android:id="@+id/map"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" />
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:text="\u00A9 OpenStreetMap Contributors" />
+
+        </RelativeLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
