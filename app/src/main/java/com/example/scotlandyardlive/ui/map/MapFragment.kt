@@ -28,6 +28,7 @@ import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.Marker
 import org.osmdroid.config.Configuration.*
 import org.osmdroid.library.BuildConfig
+import org.osmdroid.views.CustomZoomButtonsController
 import java.time.format.DateTimeFormatter
 
 
@@ -81,7 +82,7 @@ class MapFragment : Fragment() {
 
             map.isTilesScaledToDpi = true
             map.setMultiTouchControls(true)
-
+            map.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER)
 
             marker_team_X = Marker(map)
             marker_team_rot = Marker(map)
