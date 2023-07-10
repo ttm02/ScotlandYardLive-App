@@ -35,9 +35,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
+            android:layout_marginTop="10dp"
             >
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView11"
@@ -68,7 +69,7 @@
                     android:textSize="@dimen/font_size" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView12"
@@ -99,7 +100,7 @@
                     android:textSize="@dimen/font_size" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView13"
@@ -129,7 +130,7 @@
                     android:textSize="@dimen/font_size" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView14"
@@ -160,7 +161,7 @@
                     android:textSize="@dimen/font_size" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView15"
@@ -191,7 +192,7 @@
                     android:textSize="@dimen/font_size" />
             </TableRow>
 
-            <TableRow android:layout_marginBottom="8dp">
+            <TableRow android:layout_marginBottom="10dp">
 
                 <TextView
                     android:id="@+id/textView16"

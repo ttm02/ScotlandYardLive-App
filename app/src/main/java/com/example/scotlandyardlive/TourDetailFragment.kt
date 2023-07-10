@@ -82,7 +82,7 @@ class TourDetailFragment : Fragment() {
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT
             )
-            layout.setMargins(0, 8, 0, 0)
+            layout.setMargins(0, 10, 0, 0)
             row.layoutParams = layout
 
             //TODO this is some duplicate code...
