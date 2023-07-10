@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.example.scotlandyardlive.databinding.FragmentTeamSelectionBinding
-import com.example.scotlandyardlive.databinding.FragmentTourDetailBinding
 
 
 class TeamSelectionFragment : Fragment() {
@@ -68,7 +67,7 @@ class TeamSelectionFragment : Fragment() {
 
     fun select_team(team: String){
 
-        TeamPositionsManager.createdInstance(requireContext(),team)
+        TeamPositionsManager.createInstance(requireContext(),team)
         val navController = findNavController()
         navController.navigate(R.id.action_teamSelectionFragment_to_navigation_home)
 

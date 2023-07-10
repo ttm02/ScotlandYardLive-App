@@ -1,13 +1,10 @@
 package com.example.scotlandyardlive
 
 import android.content.Context
-import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.annotation.MainThread
-import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
-import com.google.auth.oauth2.AccessToken
 import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.storage.BlobId
 import com.google.cloud.storage.BlobInfo
@@ -28,7 +25,6 @@ import com.google.gson.InstanceCreator
 import com.google.gson.JsonPrimitive
 import com.google.gson.JsonSerializationContext
 import com.google.gson.JsonSerializer
-import java.io.ByteArrayOutputStream
 import java.nio.charset.StandardCharsets
 
 import kotlinx.coroutines.Dispatchers
@@ -36,8 +32,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayInputStream
 import java.io.InputStream
+import java.time.Duration
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger
+import kotlin.concurrent.thread
 
 
 data class Team(
@@ -213,11 +211,12 @@ interface UploadCallback {
 class TeamPositionsManager private constructor(
     private val currentTeam: String,
     private val teamlist: Array<Team>,
-    private val download_api_key: String = "".trimIndent(),
+    private val download_api_key: String = """
+""".trimIndent(),
     // wen requesting an update, we use this counter to count the number of updates received
     private var team_update_counter: AtomicInteger = AtomicInteger(0),
     private var team_update_in_progress: AtomicBoolean = AtomicBoolean(false),
-    private val num_teams: Int = 6
+    private val num_teams: Int = 6,
 
 ) : LiveData<LocalTime>(), DownloadCallback, UploadCallback {
 
@@ -236,7 +235,7 @@ class TeamPositionsManager private constructor(
         }
 
         @MainThread
-        fun createdInstance(context: Context, selectedTeam: String) {
+        fun createInstance(context: Context, selectedTeam: String) {
             assert(instance == null)
 
 
@@ -257,6 +256,7 @@ class TeamPositionsManager private constructor(
                 teams.values.toTypedArray(),
                 //api_key_json!!
             )
+            instance!!.request_updates()
         }
 
     }
@@ -323,11 +323,15 @@ class TeamPositionsManager private constructor(
     }
 
     fun request_updates() {
+
+        if(this.value== null || Duration.between(this.value!!, LocalTime.now())!!.seconds>R.dimen.minTimeBetweenJsonUpdates){
+        // if not minTimeBetweenJsonUpdates has passed: do nothing
         if (team_update_in_progress.compareAndSet(false, true)) {
             // if no update in progress:
             for (t in teamlist) {
                 enqueue_downloadJsonFromCloudStorage(download_api_key, t.Name + ".json", this)
             }
+        }
         }
     }
 
@@ -390,6 +394,12 @@ class TeamPositionsManager private constructor(
 
     fun add_position(pos: Position) {
 
+        while (team_update_in_progress.get()){
+            // wait for download to complete
+            // in this case freezing the app is resonable as the user wants to wait for the update anyway
+            Thread.sleep(100)
+        }
+
         var teamPos = -1
         var team_found = false
         for (i in teamlist.indices) {
@@ -411,6 +421,10 @@ class TeamPositionsManager private constructor(
         val json_string = team.tojson()
         enqueue_UploadJsonToCloudStorage(download_api_key, team.Name + ".json", json_string, this)
     }
+
+
+
+
 
     override fun onUploadComplete() {
         request_updates()
