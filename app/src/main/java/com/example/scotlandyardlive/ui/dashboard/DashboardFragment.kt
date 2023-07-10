@@ -48,6 +48,8 @@ class DashboardFragment : Fragment() {
     private lateinit var teamview_gelb:TeamView_row
     private lateinit var teamview_orange:TeamView_row
 
+    private lateinit var updateTime_text : TextView
+
     override fun onCreateView(
             inflater: LayoutInflater,
             container: ViewGroup?,
@@ -62,6 +64,8 @@ class DashboardFragment : Fragment() {
         thiscontext = container!!.context
 
         teamlocations= TeamPositionsManager.getInstance()
+
+        updateTime_text=binding.textViewUpdateTime
 
         teamview_x= TeamView_row(binding.textView11,binding.textClock1,binding.imageView1,binding.textView1)
         teamview_rot=TeamView_row(binding.textView12,binding.textClock2,binding.imageView2,binding.textView2)
@@ -78,6 +82,8 @@ class DashboardFragment : Fragment() {
         set_temview_on_click_listener("Orange",teamview_orange)
         teamlocations.observe( getViewLifecycleOwner(), Observer<LocalTime> { update_time: LocalTime? ->
             // Update the UI.
+            val formatter = DateTimeFormatter.ofPattern("HH:mm")
+            updateTime_text.text = "Last Update: " + update_time!!.format(formatter)
             set_team_veiws()
         }       )
 
@@ -86,7 +92,7 @@ class DashboardFragment : Fragment() {
         // update will only trigger, if one send its location
         //teamlocations.request_updates()
 
-        return root
+         return root
     }
 
     fun set_temview_on_click_listener( teamName:String, row:TeamView_row){
@@ -172,6 +178,13 @@ class DashboardFragment : Fragment() {
         super.onResume()
         set_team_veiws()
         teamlocations.request_updates()
+        val time : LocalTime? = teamlocations.value
+        if (time != null){
+            val formatter = DateTimeFormatter.ofPattern("HH:mm")
+            updateTime_text.text = "Last Update: " + time!!.format(formatter)
+        }else{
+            updateTime_text.text = "Last Update: "
+        }
     }
 
     fun set_team_veiws(){
