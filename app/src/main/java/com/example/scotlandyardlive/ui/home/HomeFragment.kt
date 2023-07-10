@@ -342,13 +342,25 @@ class HomeFragment : Fragment() {
             assert(transport == "-")
             transport = "M"
         }
-        assert(transport != "-")
+        if (transport == "-"){
+            Toast.makeText(requireContext(), "Bitte Verkehrsmittel wählen", Toast.LENGTH_SHORT)
+                .show()
+            return
+        }
 
 
         var station = stationtextview.text.toString()
 
         if (teamposManager.getCurrentTeamName() == "MR X" && !position_check_box.isChecked) {
             station = "hidden"
+        }else{
+            // check if station name is actually known
+            if (!StationMap.getInstance(requireContext()).get_station_list().contains(station)){
+                Toast.makeText(requireContext(), "Station Unbekannt", Toast.LENGTH_SHORT)
+                    .show()
+                return
+            }
+
         }
         val new_loc: Position = Position(LocalTime.now(), station, transport)
 
